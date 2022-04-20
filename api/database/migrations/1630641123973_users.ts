@@ -15,7 +15,7 @@ export default class UsersSchema extends BaseSchema {
             table.string("student_id")
             table.string("course")
             table.string("dept").notNullable();
-            table.integer("status").defaultTo(0)
+            table.enum("status", [0, 1, 2]).defaultTo(0)
             table.timestamp('created_at', { useTz: true }).notNullable().defaultTo(this.now())
             table.timestamp('updated_at', { useTz: true }).notNullable().defaultTo(this.now())
         })
