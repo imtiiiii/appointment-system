@@ -87,12 +87,24 @@
 						type="password"
 					></Input>
 				</div>
+				<!-- USER_TYPE SELECT -->
+				<div class="_log_input_group">
+					<Select
+						placeholder="Your identity"
+						size="large"
+						v-model="form.user_type"
+					>
+						<Option value="teacher">teacher</Option>
+						<Option value="student">student</Option>
+					</Select>
+				</div>
 				<!-- **********STUDENT ID ************ -->
 				<div class="_log_input_group">
 					<Input
 						placeholder="STUDENT ID"
 						size="large"
 						type="text"
+						v-model="form.student_id"
 					></Input>
 				</div>
 				<!-- *******DEPT.********* -->
@@ -101,6 +113,7 @@
 						placeholder="your depertment"
 						size="large"
 						type="text"
+						v-model="form.dept"
 					></Input>
 				</div>
 				<!-- ******** COURSE ************** -->
@@ -109,14 +122,8 @@
 						placeholder="COURSE"
 						size="large"
 						type="text"
+						v-model="form.course"
 					></Input>
-				</div>
-				<!-- USER_TYPE SELECT -->
-				<div class="_log_input_group">
-					<Select placeholder="Your identity" size="large">
-						<Option value="teacher">teacher</Option>
-						<Option value="student">student</Option>
-					</Select>
 				</div>
 
 				<!-- ********* GENDER SELECT *********** -->
@@ -164,9 +171,11 @@ export default {
 				last_name: "",
 				email: "",
 				password: "",
-				gender: "",
 				password_confirmation: "",
-				agree: true,
+				user_type: "",
+				student_id: null,
+				dept: null,
+				course: null,
 			},
 			reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
 			isLoading: false,
@@ -174,29 +183,30 @@ export default {
 	},
 	methods: {
 		async register() {
-			if (!this.form.agree)
-				return this.i("Please accept our temrs and privacy policy");
-			if (this.form.first_name == "")
-				return this.i("Firstname is requied");
-			if (this.form.last_name == "") return this.i("Lastname is requied");
-			if (this.form.email == "") return this.i("Email is requied");
-			if (this.form.email && !this.reg.test(this.form.email))
-				return this.i("Invalid email format!");
-			if (this.form.password == "") return this.i("Password is requied");
-			if (this.form.password.trim().length < 6)
-				return this.i("Password must be at least 6 charecters long.");
-			if (this.form.password != this.form.password_confirmation)
-				return this.i("Password and confirm password doesn't match");
-			if (this.form.gender == "") return this.i("Gender is required");
-			this.form.email = this.form.email.toLowerCase();
-			this.isLoading = true;
-			const res = await this.callApi("post", "/auth/register", this.form);
-			if (res.status == 200) {
-				this.s(res.data.msg);
-				window.location.href = `/verify-account?email=${this.form.email}`;
-				this.clearData();
-			}
-			this.isLoading = false;
+			// if (!this.form.agree)
+			// 	return this.i("Please accept our temrs and privacy policy");
+			// if (this.form.first_name == "")
+			// 	return this.i("Firstname is requied");
+			// if (this.form.last_name == "") return this.i("Lastname is requied");
+			// if (this.form.email == "") return this.i("Email is requied");
+			// if (this.form.email && !this.reg.test(this.form.email))
+			// 	return this.i("Invalid email format!");
+			// if (this.form.password == "") return this.i("Password is requied");
+			// if (this.form.password.trim().length < 6)
+			// 	return this.i("Password must be at least 6 charecters long.");
+			// if (this.form.password != this.form.password_confirmation)
+			// 	return this.i("Password and confirm password doesn't match");
+			// if (this.form.gender == "") return this.i("Gender is required");
+			// this.form.email = this.form.email.toLowerCase();
+			// this.isLoading = true;
+			// const res = await this.callApi("post", "/auth/register", this.form);
+			// if (res.status == 200) {
+			// 	this.s(res.data.msg);
+			// 	window.location.href = `/verify-account?email=${this.form.email}`;
+			// 	this.clearData();
+			// }
+			// this.isLoading = false;
+			console.log(this.form);
 		},
 
 		clearData() {
