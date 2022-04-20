@@ -9,40 +9,7 @@ import {
 export default class User extends BaseModel {
   @column({ isPrimary: true })
   public id: number
-
-  @column()
-  public first_name: string
-
-  @column()
-  public last_name: string
-
-  @column()
-  public email: string
-
-  @column()
-  public gender: string
-
-  @column()
-  public username: string
-
-  @column()
-  public profile_pic: string
-
-  @column()
-  public forgot_code: string
-
-  @column()
-  public is_banned: string
-
-  @column()
-  public cover: string
-
-  @column({ serializeAs: null })
-  public password: string
-
-  @column()
-  public rememberMeToken?: string
-
+  
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
