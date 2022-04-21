@@ -64,10 +64,22 @@ export default class AuthController {
     try {
       const userStatus:String = await this.authService.userStatus(data.uid);
       if(userStatus === 'active'){
-        return await ctx.auth.use('web').attempt(data.uid, data.password)
+        let loginInfo = await ctx.auth.use('web').attempt(data.uid, data.password);
+        loginInfo = loginInfo.toJSON();
+        delete loginInfo.password;
+        // console.log(loginInfo)
+        // return await ctx.auth.use('web').attempt(data.uid, data.password)
+        // return loginInfo;
+        const result = [];
+        result.push(loginInfo);
+        return ctx.response.status(200).send({
+          status:'OK',
+          message:'Logged In successfull',
+          result:result
+        });
       }else{
         return await ctx.response.status(200).send({
-          status:'OK',
+          status:'PENDING',
           message:'User is registerd and not varified yet by Admin',
           result:[
             {
