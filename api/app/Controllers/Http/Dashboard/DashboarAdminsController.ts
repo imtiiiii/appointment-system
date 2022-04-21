@@ -7,8 +7,7 @@ export default class DashboarAdminsController {
 
     }
     public async requested(ctx: HttpContextContract) {
-        const users = await User.query().where("status", "")
-        // console.log(users[0]);
+        const users = await User.query().where("status", "0")
         return users
     }
     public async updateStatus(ctx: HttpContextContract) {
