@@ -99,7 +99,10 @@
 					</Select>
 				</div>
 				<!-- **********STUDENT ID ************ -->
-				<div class="_log_input_group">
+				<div
+					class="_log_input_group"
+					v-if="form.user_type === 'student'"
+				>
 					<Input
 						placeholder="STUDENT ID"
 						size="large"
@@ -117,7 +120,10 @@
 					></Input>
 				</div>
 				<!-- ******** COURSE ************** -->
-				<div class="_log_input_group">
+				<div
+					class="_log_input_group"
+					v-if="form.user_type === 'teacher'"
+				>
 					<Input
 						placeholder="COURSE"
 						size="large"
@@ -185,19 +191,9 @@ export default {
 		async register() {
 			// if (!this.form.agree)
 			// 	return this.i("Please accept our temrs and privacy policy");
-			// if (this.form.first_name == "")
-			// 	return this.i("Firstname is requied");
-			// if (this.form.last_name == "") return this.i("Lastname is requied");
-			// if (this.form.email == "") return this.i("Email is requied");
-			// if (this.form.email && !this.reg.test(this.form.email))
-			// 	return this.i("Invalid email format!");
-			// if (this.form.password == "") return this.i("Password is requied");
-			// if (this.form.password.trim().length < 6)
-			// 	return this.i("Password must be at least 6 charecters long.");
-			// if (this.form.password != this.form.password_confirmation)
-			// 	return this.i("Password and confirm password doesn't match");
+
 			// if (this.form.gender == "") return this.i("Gender is required");
-			// this.form.email = this.form.email.toLowerCase();
+
 			// this.isLoading = true;
 			// const res = await this.callApi("post", "/auth/register", this.form);
 			// if (res.status == 200) {
@@ -206,7 +202,41 @@ export default {
 			// 	this.clearData();
 			// }
 			// this.isLoading = false;
-			console.log(this.form);
+
+			// ************FRONT END VALIDATION**************
+			this.form.email = this.form.email.toLowerCase();
+			if (this.form.first_name == "")
+				return this.i("Firstname is requied");
+			if (this.form.last_name == "") return this.i("Lastname is requied");
+			// console.log(this.form.user_type);
+			if (this.form.email == "") return this.i("Email is requied");
+			if (this.form.email && !this.reg.test(this.form.email))
+				return this.i("Invalid email format!");
+			if (this.form.password == "") return this.i("Password is requied");
+			if (this.form.password.trim().length < 6) {
+				return this.e("Password must be at least 6 charecters long.");
+			}
+			if (this.form.password != this.form.password_confirmation)
+				return this.e("Password and confirm password doesn't match");
+			if (this.form.user_type === "") {
+				return this.i("Please choose your identity");
+			}
+			if (this.form.dept === null) {
+				return this.i("Please choose your Depertment");
+			}
+			if (
+				this.form.user_type === "teacher" &&
+				this.form.course === null
+			) {
+				return this.e("Kindly add your course name");
+			}
+			if (
+				this.form.user_type === "student" &&
+				this.form.student_id === null
+			) {
+				return this.e("Provide your student ID");
+			}
+			return this.clearData();
 		},
 
 		clearData() {
@@ -215,9 +245,11 @@ export default {
 				last_name: "",
 				email: "",
 				password: "",
-				gender: "",
 				password_confirmation: "",
-				agree: true,
+				user_type: "",
+				student_id: null,
+				dept: null,
+				course: null,
 			};
 		},
 	},
