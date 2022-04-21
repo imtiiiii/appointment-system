@@ -41,21 +41,57 @@ export default class AuthController {
   }
   
   async login(ctx : HttpContextContract){
-    await this.authValidator.validateLoginSchema(ctx)
+    try {
+      await this.authValidator.validateLoginSchema(ctx)  
+    } catch (error) {
+      const errorObject = JSON.parse(error);
+      return ctx.response.status(422).send({
+        status:'BAD',
+        message:errorObject,
+        result:[]
+      })
+    }
+    // await this.authValidator.validateLoginSchema(ctx)
     let data = ctx.request.all();
-    return ctx.auth.use('web').attempt(data.email, data.password)
+    try {
+       return await ctx.auth.use('web').attempt(data.uid, data.password)
+    } catch (error) {
+      return ctx.response.status(403).send({
+        status: 'BAD',
+        message:'username or email or password was incorrect',
+        result:[]
+      });
+    }
+    // return await ctx.auth.use('web').attempt(data.uid, data.password)
   }
   
   async getUser(ctx:HttpContextContract){
     try{
-      return ctx.auth.use('web').authenticate();
-    }catch(error){
+      // return ctx.auth.use('web').authenticate();
+      if(ctx.auth.isLoggedIn){
+        return await ctx.auth.use('web').authenticate();
+      }
+      throw 'May Session Expired'
       
+    }catch(error){
+      return ctx.response.status(403).send({
+        status: 'BAD',
+        message:'May session Expired Or User is Logout',
+        result:[]
+      });
     }
   }
-  
-  async logout({auth}){
-    return auth.logout()
+  /**
+   * Only Logged In User Can access this Route
+   */
+  async logout({auth,response}){
+    // return auth.logout()
+    await auth.logout()
+    return response.status(200).send({
+      status:'OK',
+      message:'User is logged out successfully!!',
+      result:[]
+    })
   }
   
   async verifyEmail(ctx: HttpContextContract) {

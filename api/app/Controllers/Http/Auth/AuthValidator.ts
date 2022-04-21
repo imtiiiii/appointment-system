@@ -60,18 +60,13 @@ export default class AuthValidator{
     }
     public async validateLoginSchema(ctx : HttpContextContract){
       const userSchema = schema.create({
-        email: schema.string({trim: true}, [
-          rules.email({
-            sanitize: true,
-          }),
-
-        ]),
+        uid: schema.string({trim: true}),
         password: schema.string({trim: true,}),
 
 
       })
       const msg =  {
-        'email.required': 'Email is required',
+        'uid.required': 'Email is required',
         'password.required': 'Password is required',
 
       }
@@ -79,7 +74,10 @@ export default class AuthValidator{
         const payload = await ctx.request.validate({ schema: userSchema, messages : msg })
         return payload
       } catch (error) {
-         return ctx.response.status(422).send(error.messages)
+        console.log(error.messages)
+        //  return ctx.response.status(422).send(error.messages)
+        const errorMessage = JSON.stringify(error.messages);
+        throw errorMessage;
       }
 
 
