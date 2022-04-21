@@ -8,7 +8,7 @@
 				<!-- ********** FIRST NAME ***************** -->
 				<div class="_log_input_group">
 					<Input
-						v-model="form.first_name"
+						v-model="form.firstName"
 						placeholder="First name"
 						size="large"
 						type="text"
@@ -17,7 +17,7 @@
 				<!-- ********* LAST NAME ********** -->
 				<div class="_log_input_group">
 					<Input
-						v-model="form.last_name"
+						v-model="form.lastName"
 						placeholder="Last name"
 						size="large"
 						type="text"
@@ -55,7 +55,7 @@
 					<Select
 						placeholder="Your identity"
 						size="large"
-						v-model="form.user_type"
+						v-model="form.userType"
 					>
 						<Option value="teacher">teacher</Option>
 						<Option value="student">student</Option>
@@ -65,13 +65,13 @@
 				<!-- **********STUDENT ID ************ -->
 				<div
 					class="_log_input_group"
-					v-if="form.user_type === 'student'"
+					v-if="form.userType === 'student'"
 				>
 					<Input
 						placeholder="STUDENT ID"
 						size="large"
 						type="text"
-						v-model="form.student_id"
+						v-model="form.studentId"
 					></Input>
 				</div>
 				<!-- *******DEPT.********* -->
@@ -155,9 +155,9 @@ export default {
 		async register() {
 			// ************FRONT END VALIDATION**************
 			this.form.email = this.form.email.toLowerCase();
-			if (this.form.first_name == "")
+			if (this.form.firstName == "")
 				return this.i("Firstname is requied");
-			if (this.form.last_name == "") return this.i("Lastname is requied");
+			if (this.form.lastName == "") return this.i("Lastname is requied");
 			// console.log(this.form.user_type);
 			if (this.form.email == "") return this.i("Email is requied");
 			if (this.form.email && !this.reg.test(this.form.email))
@@ -168,7 +168,7 @@ export default {
 			}
 			if (this.form.password != this.form.password_confirmation)
 				return this.e("Password and confirm password doesn't match");
-			if (this.form.user_type === "") {
+			if (this.form.userType === "") {
 				return this.i("Please choose your identity");
 			}
 			if (this.form.dept === null) {
@@ -181,8 +181,8 @@ export default {
 			// 	return this.e("Kindly add your course name");
 			// }
 			if (
-				this.form.user_type === "student" &&
-				this.form.student_id === null
+				this.form.userType === "student" &&
+				this.form.studentId === null
 			) {
 				return this.e("Provide your student ID");
 			}
@@ -195,18 +195,20 @@ export default {
 			);
 			console.log(this.form);
 			console.log(regReq);
+			this.clearData();
+
 			return regReq;
 		},
 
 		clearData() {
 			this.form = {
-				first_name: "",
-				last_name: "",
+				firstName: "",
+				lastName: "",
 				email: "",
 				password: "",
 				password_confirmation: "",
-				user_type: "",
-				student_id: null,
+				userType: "",
+				studentId: null,
 				dept: null,
 			};
 		},
