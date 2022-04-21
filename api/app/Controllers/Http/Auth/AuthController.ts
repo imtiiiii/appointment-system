@@ -20,7 +20,8 @@ export default class AuthController {
           "password":"123123",
           "password_confirmation":"123123",
           "userType":"teacher",
-          "studentId":23
+          "studentId":23,
+          "dept":"math"
       }
    */
   async register(ctx : HttpContextContract){

@@ -30,7 +30,8 @@ export default class AuthValidator{
             rules.confirmed()
         ]),
         userType: schema.enum(['student','teacher'] as const),
-        studentId: schema.number()
+        studentId: schema.number(),
+        dept: schema.string({trim:true})
 
 
       })
