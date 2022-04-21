@@ -45,7 +45,7 @@ export default class AuthService {
       // }
       return ctx.response.status(200).send({ 
         status:'OK',
-        msg: 'Account created successfully!', 
+        message: 'Account created successfully!', 
         results:[],
       })
       
