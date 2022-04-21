@@ -11,7 +11,17 @@ export default class AuthController {
     this.authService =  new AuthService()
     this.authValidator =  new AuthValidator()
   }
-  
+  /**
+   * Example Body:
+   *  {
+          "firstName": "ak",
+          "lastName":"Kmk",
+          "email":"akashcsemu4@gmail.com",
+          "password":"123123",
+          "password_confirmation":"123123",
+          "userType":"teacher"
+      }
+   */
   async register(ctx : HttpContextContract){
     try {
       await this.authValidator.validateSignupSchema(ctx)
