@@ -161,7 +161,7 @@ export default {
 			// console.log(this.form.user_type);
 			if (this.form.email == "") return this.i("Email is requied");
 			if (this.form.email && !this.reg.test(this.form.email))
-				return this.i("Invalid email format!");
+				return this.e("Invalid email format!");
 			if (this.form.password == "") return this.i("Password is requied");
 			if (this.form.password.trim().length < 6) {
 				return this.e("Password must be at least 6 charecters long.");
@@ -171,33 +171,33 @@ export default {
 			if (this.form.userType === "") {
 				return this.i("Please choose your identity");
 			}
-			if (this.form.dept === null) {
+			if (this.form.dept === "" || this.form.dept === null) {
 				return this.i("Please choose your Depertment");
 			}
-			// if (
-			// 	this.form.user_type === "teacher" &&
-			// 	this.form.course === null
-			// ) {
-			// 	return this.e("Kindly add your course name");
-			// }
 			if (
-				this.form.userType === "student" &&
-				this.form.studentId === null
+				(this.form.userType === "student" &&
+					this.form.studentId === null) ||
+				this.form.studentId === ""
 			) {
 				return this.e("Provide your student ID");
 			}
-			// ******* IF VALIDATION PASSES , DATA WILL GO TO SERVER**********
+			// *******  IF VALIDATION PASSES **********
+			// ********** COVERING CORNER CASES*********
+			if (this.form.userType === "teacher") this.form.studentId = null;
+			if (this.form.dept === "") this.form.dept = null;
+
 			// regReq means registration request
 			const regReq = await this.callApi(
 				"post",
 				"http://localhost:3333/auth/register",
 				this.form
 			);
-			console.log(this.form);
-			console.log(regReq);
-			this.clearData();
-
-			return regReq;
+			if (regReq.status === 200) {
+				this.clearData();
+				return this.s("Your registration requested submitted");
+			} else {
+				return this.e("something went wrong please try again");
+			}
 		},
 
 		clearData() {
