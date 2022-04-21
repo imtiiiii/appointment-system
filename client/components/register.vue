@@ -84,7 +84,7 @@
 					></Input>
 				</div>
 				<!-- ******** COURSE ************** -->
-				<div
+				<!-- <div
 					class="_log_input_group"
 					v-if="form.user_type === 'teacher'"
 				>
@@ -94,7 +94,7 @@
 						type="text"
 						v-model="form.course"
 					></Input>
-				</div>
+				</div> -->
 
 				<!-- ********* GENDER SELECT *********** -->
 				<!-- <div class="_log_input_group">
@@ -146,7 +146,6 @@ export default {
 				userType: "",
 				studentId: null,
 				dept: null,
-				course: null,
 			},
 			reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
 			isLoading: false,
@@ -175,12 +174,12 @@ export default {
 			if (this.form.dept === null) {
 				return this.i("Please choose your Depertment");
 			}
-			if (
-				this.form.user_type === "teacher" &&
-				this.form.course === null
-			) {
-				return this.e("Kindly add your course name");
-			}
+			// if (
+			// 	this.form.user_type === "teacher" &&
+			// 	this.form.course === null
+			// ) {
+			// 	return this.e("Kindly add your course name");
+			// }
 			if (
 				this.form.user_type === "student" &&
 				this.form.student_id === null
@@ -191,7 +190,7 @@ export default {
 			// regReq means registration request
 			const regReq = await this.callApi(
 				"post",
-				"/auth/register",
+				"http://localhost:3333/auth/register",
 				this.form
 			);
 			console.log(this.form);
@@ -209,7 +208,6 @@ export default {
 				user_type: "",
 				student_id: null,
 				dept: null,
-				course: null,
 			};
 		},
 	},
