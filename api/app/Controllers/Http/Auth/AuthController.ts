@@ -19,7 +19,8 @@ export default class AuthController {
           "email":"akashcsemu4@gmail.com",
           "password":"123123",
           "password_confirmation":"123123",
-          "userType":"teacher"
+          "userType":"teacher",
+          "studentId":23
       }
    */
   async register(ctx : HttpContextContract){
