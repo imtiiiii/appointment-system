@@ -189,20 +189,6 @@ export default {
 	},
 	methods: {
 		async register() {
-			// if (!this.form.agree)
-			// 	return this.i("Please accept our temrs and privacy policy");
-
-			// if (this.form.gender == "") return this.i("Gender is required");
-
-			// this.isLoading = true;
-			// const res = await this.callApi("post", "/auth/register", this.form);
-			// if (res.status == 200) {
-			// 	this.s(res.data.msg);
-			// 	window.location.href = `/verify-account?email=${this.form.email}`;
-			// 	this.clearData();
-			// }
-			// this.isLoading = false;
-
 			// ************FRONT END VALIDATION**************
 			this.form.email = this.form.email.toLowerCase();
 			if (this.form.first_name == "")
@@ -236,6 +222,7 @@ export default {
 			) {
 				return this.e("Provide your student ID");
 			}
+			// ******* IF VALIDATION PASSES , DATA WILL GO TO SERVER**********
 			return this.clearData();
 		},
 
