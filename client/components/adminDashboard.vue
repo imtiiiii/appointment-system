@@ -4,7 +4,7 @@
 			style="
 				display: flex;
 				justify-content: space-between;
-				padding: 20px 50px;
+				border-bottom: 2px solid black;
 			"
 		>
 			<button

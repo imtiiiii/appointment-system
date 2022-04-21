@@ -1,5 +1,5 @@
 <template>
-	<div style="width: 60%; margin: 0 auto; border: 2px solid black">
+	<div>
 		<admin-dashboard></admin-dashboard>
 	</div>
 </template>
