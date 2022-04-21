@@ -36,7 +36,7 @@
 
             <div class="_log_form">
                 <div class="_log_input_group">
-                    <Input v-model="form.email" placeholder="Email address" size="large" type="text"></Input>
+                    <Input v-model="form.uid" placeholder="Email or Username" size="large" type="text"></Input>
                 </div>
                 
                 <div class="_log_input_group">
@@ -60,8 +60,8 @@ export default {
     data(){
        return{
           form : {
-              email : '',
-              password : '',
+              uid : 'testuser1@gmail.com',
+              password : 'testuser',
 
           },
           isLoading : false
@@ -69,15 +69,40 @@ export default {
     },
     methods : {
        async login(){
-          if(this.form.email == '') return this.i("Email is requied")
-          if(this.form.password == '') return this.i("Password is requied")
-          this.form.email = this.form.email.toLowerCase()
-          this.isLoading = true
-          const res = await this.callApi('post', '/auth/login', this.form)
-          if(res.status==200){
-            window.location = '/'
-          }
-          this.isLoading = false
+           let isAnyFieldEmpty = false;
+           let emptyFieldName = '';
+           Object.keys(this.form).forEach((value)=>{
+               if(value === false){
+                   isAnyFieldEmpty = true;
+                   emptyFieldName = value;
+               }
+           })
+           if(isAnyFieldEmpty === true){
+               this.w(`${emptyFieldName} field is empty`);
+           }else{
+               try {
+                   const {data:loginInfo} = await this.callApi('post','/auth/login',this.form);
+                   if(loginInfo.status === 'PENDING'){
+                       this.i('You are not approved by Admin yet')
+                   }else{
+                       this.s("LoggedIn Successfully!")
+                       const authUserData = loginInfo.result[0];
+                       this.$store.state.authUser = authUserData;
+                       this.$router.push('/');
+                   }
+               } catch (error) {
+                   this.swr();
+               }
+           }
+        //   if(this.form.email == '') return this.i("Email is requied")
+        //   if(this.form.password == '') return this.i("Password is requied")
+        //   this.form.email = this.form.email.toLowerCase()
+        //   this.isLoading = true
+        //   const res = await this.callApi('post', '/auth/login', this.form)
+        //   if(res.status==200){
+        //     window.location = '/'
+        //   }
+        //   this.isLoading = false
        }
     }
 }
