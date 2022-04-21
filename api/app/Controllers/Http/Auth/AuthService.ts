@@ -13,32 +13,41 @@ export default class AuthService {
     public async register(ctx){
       let data = ctx.request.all();
       let number = Math.floor(Math.random() * 899999 + 100000)
-      delete data.agree
       delete data.password_confirmation
-      let username = data.first_name +'_'+ data.last_name
-      let totalUsers : any[] = await this.authQuery.searchUsername(username)
+      let userName = data.firstName +'_'+ data.lastName
+      let totalUsers : any[] = await this.authQuery.searchUsername(userName)
       let numberOfUsers : number = totalUsers[0].total
       let newCount = numberOfUsers > 0 ? ++numberOfUsers : ''
-      username = newCount > 0 ? `${username}_${newCount}` : username
-      data.username = username
-      data.forgot_code= number,
-      data.is_banned='unverified'
+      userName = newCount > 0 ? `${userName}_${newCount}` : userName
+      data.userName = userName
+      /**
+       * Enum values for data.status
+       * 0 -> pending
+       * 1 -> active
+       * 2 -> rejected
+       */
+      data.status = 0 
       
       let user :any = await this.authQuery.register(data)
-      if(user){
-        let obj ={
-          username: user?.first_name +' '+user?.last_name,
-          token:user?.forgot_code
-        }
-        await Mail.send((message) => {
-          message
-              .from('noreply@scrapabill.com', 'Social-Network')
-              .to(user.email)
-              .subject('Please confirm your email address')
-              .htmlView('emails.verification_emai',  obj)
-        })
-      }
-      return ctx.response.status(200).send({ msg: 'Account created successfully!' })
+      //TODO: Email features currently off
+      // if(user){
+      //   let obj ={
+      //     username: user?.first_name +' '+user?.last_name,
+      //     token:user?.forgot_code
+      //   }
+      //   await Mail.send((message) => {
+      //     message
+      //         .from('noreply@scrapabill.com', 'Social-Network')
+      //         .to(user.email)
+      //         .subject('Please confirm your email address')
+      //         .htmlView('emails.verification_emai',  obj)
+      //   })
+      // }
+      return ctx.response.status(200).send({ 
+        status:'OK',
+        msg: 'Account created successfully!', 
+        results:[],
+      })
       
     }
     public async sendResetToken(ctx,data){

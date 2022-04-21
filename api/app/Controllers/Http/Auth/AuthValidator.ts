@@ -4,7 +4,19 @@ export default class AuthValidator{
   
     public async validateSignupSchema(ctx : HttpContextContract){
       const userSchema = schema.create({
-        email: schema.string({}, [
+        firstName : schema.string({
+          escape: true,
+          trim: true
+        }),
+        lastName : schema.string({
+          escape: true,
+          trim: true
+        }),
+        email: schema.string({ 
+          escape:true, 
+          trim: true 
+        },
+        [
           rules.email({
             sanitize: true,
             ignoreMaxLength: false,
@@ -12,23 +24,12 @@ export default class AuthValidator{
           }),
           rules.unique({ table: 'users', column: 'email' }),
         ]),
-        first_name : schema.string({
-          escape: true,
-          trim: true
-        }),
-        last_name : schema.string({
-          escape: true,
-          trim: true
-        }),
-        gender : schema.string({
-          escape: true,
-          trim: true
-        }),
         password: schema.string({escape: true,
           trim: true}, [
             rules.minLength(6),
             rules.confirmed()
         ]),
+        userType: schema.enum(['student','teacher'] as const)
 
 
       })
@@ -41,14 +42,15 @@ export default class AuthValidator{
         'password.required': 'Password is required',
         'password.minLength': 'Password must be at least 6 charecters long',
         'password_confirmation.confirmed': "Password and confirm password doesn't match",
-        'gender.required': "Gender is required",
       }
-      //return await ctx.request.validate({ schema: userSchema, messages : msg })
+      // return await ctx.request.validate({ schema: userSchema, messages : msg })
       try {
         const payload = await ctx.request.validate({ schema: userSchema, messages : msg })
         return payload
       } catch (error) {
-         return ctx.response.status(422).send(error.messages)
+        //  return ctx.response.status(422).send(error.messages)
+        const errorMessage = JSON.stringify(error.messages); 
+        throw errorMessage;
       }
 
 

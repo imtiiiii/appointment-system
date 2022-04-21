@@ -3,8 +3,8 @@ import Database from '@ioc:Adonis/Lucid/Database'
 
 export default class AuthQuery{
   
-  searchUsername(username){
-    return Database.from('users').where('username','like', `${username}%`).count('* as total')
+  searchUsername(userName){
+    return Database.from('users').where('user_name','like', `${userName}%`).count('* as total')
   }
   
   register(data){

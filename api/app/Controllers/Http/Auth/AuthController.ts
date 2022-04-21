@@ -13,7 +13,18 @@ export default class AuthController {
   }
   
   async register(ctx : HttpContextContract){
-    await this.authValidator.validateSignupSchema(ctx)
+    try {
+      await this.authValidator.validateSignupSchema(ctx)
+    } catch (error) {
+      const errorObject = JSON.parse(error);
+      // console.log(errorObject);
+      return ctx.response.status(422).send({
+        status:'BAD',
+        message:errorObject,
+        result:[]
+      })
+    }
+    // await this.authValidator.validateSignupSchema(ctx)
     return this.authService.register(ctx);
   }
   
