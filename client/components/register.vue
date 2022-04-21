@@ -138,13 +138,13 @@ export default {
 	data() {
 		return {
 			form: {
-				first_name: "",
-				last_name: "",
+				firstName: "",
+				lastName: "",
 				email: "",
 				password: "",
 				password_confirmation: "",
-				user_type: "",
-				student_id: null,
+				userType: "",
+				studentId: null,
 				dept: null,
 				course: null,
 			},
@@ -188,7 +188,15 @@ export default {
 				return this.e("Provide your student ID");
 			}
 			// ******* IF VALIDATION PASSES , DATA WILL GO TO SERVER**********
-			return this.clearData();
+			// regReq means registration request
+			const regReq = await this.callApi(
+				"post",
+				"/auth/register",
+				this.form
+			);
+			console.log(this.form);
+			console.log(regReq);
+			return regReq;
 		},
 
 		clearData() {
