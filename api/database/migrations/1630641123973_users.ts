@@ -15,11 +15,11 @@ export default class UsersSchema extends BaseSchema {
             table.string("student_id")
             table.string("course")
             table.string("dept")
-            table.enum("status", [0, 1, 2]).defaultTo(0)
+            table.enum("status", ['0', '1', '2']).defaultTo(0)
             /**
-             * 0 -> pending
-             * 1 -> accepted
-             * 2 -> rejected
+             * '0' -> pending
+             * '1' -> accepted
+             * '2' -> rejected
              */
             table.timestamp('created_at', { useTz: true }).notNullable().defaultTo(this.now())
             table.timestamp('updated_at', { useTz: true }).notNullable().defaultTo(this.now())

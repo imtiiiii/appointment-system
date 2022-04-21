@@ -11,7 +11,8 @@ export default class AuthController {
     this.authService =  new AuthService()
     this.authValidator =  new AuthValidator()
   }
-  /**
+  /** 
+   * Registration Controller
    * Example Body:
    *  {
           "firstName": "ak",
@@ -20,7 +21,7 @@ export default class AuthController {
           "password":"123123",
           "password_confirmation":"123123",
           "userType":"teacher",
-          "studentId":23,
+          "studentId":23, // Optional -> Depend on userType.Ommit studentId if userType is student or admin
           "dept":"math"
       }
    */
@@ -39,7 +40,14 @@ export default class AuthController {
     // await this.authValidator.validateSignupSchema(ctx)
     return this.authService.register(ctx);
   }
-  
+  /**
+   * Login Controller 
+   * Example Post Body:
+   *  {
+        "uid":"ak_Kmk", // uid also accept Email Address
+        "password":"123123"
+      }
+   */
   async login(ctx : HttpContextContract){
     try {
       await this.authValidator.validateLoginSchema(ctx)  
@@ -54,7 +62,21 @@ export default class AuthController {
     // await this.authValidator.validateLoginSchema(ctx)
     let data = ctx.request.all();
     try {
-       return await ctx.auth.use('web').attempt(data.uid, data.password)
+      const userStatus:String = await this.authService.userStatus(data.uid);
+      if(userStatus === 'active'){
+        return await ctx.auth.use('web').attempt(data.uid, data.password)
+      }else{
+        return await ctx.response.status(200).send({
+          status:'OK',
+          message:'User is registerd and not varified yet by Admin',
+          result:[
+            {
+              user_status: userStatus
+            }
+          ]
+        });
+      }
+      //  return await ctx.auth.use('web').attempt(data.uid, data.password)
     } catch (error) {
       return ctx.response.status(403).send({
         status: 'BAD',

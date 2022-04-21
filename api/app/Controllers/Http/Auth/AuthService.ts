@@ -22,11 +22,11 @@ export default class AuthService {
       data.userName = userName
       /**
        * Enum values for data.status
-       * 0 -> pending
-       * 1 -> active
-       * 2 -> rejected
+       * '0' -> pending // Default Value
+       * '1' -> active
+       * '2' -> rejected
        */
-      data.status = 0 
+      data.status = '0' 
       
       let user :any = await this.authQuery.register(data)
       //TODO: Email features currently off
@@ -108,7 +108,7 @@ export default class AuthService {
       }
     }
 
-
+    
     public async passwordReset(ctx,data) {
       // let data = ctx.request.all();
       const userInfo :any = await this.authQuery.getSingleUserInfo('email', data.email)
@@ -124,6 +124,26 @@ export default class AuthService {
       // return ctx.auth.use("web").attempt(data.email, data.password)
     }
     
+    /**
+     * 
+     * @param uid User's Email or Username
+     * @returns pending | active | rejected
+     */
+    public async userStatus(uid){
+      const statusMap = new Map([
+        ['0','pending'],
+        ['1','active'],
+        ['2','rejected']
+      ])
+      let userInfo = await User.query().where('userName',uid).orWhere('email',uid);
+      if(userInfo.length > 0){
+        userInfo = userInfo[0].toJSON();
+        // console.log(userInfo.status);
+        return statusMap.get(userInfo.status);
+      }else{
+        throw 'User is not Register yet'
+      }
+    }
     
     
     
