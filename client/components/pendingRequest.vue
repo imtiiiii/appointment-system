@@ -20,7 +20,7 @@
 
 				<div style="margin: 30px 0px">
 					<button
-						v-on:click="accept(request.id)"
+						v-on:click.once="accept(request.id)"
 						class="accept"
 						style="
 							background-color: #42cc8c;
@@ -31,7 +31,7 @@
 						Accept
 					</button>
 					<button
-						v-on:click="reject(request.id)"
+						v-on:click.once="reject(request.id)"
 						class="reject"
 						style="
 							background-color: #ff531d;
