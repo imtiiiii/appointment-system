@@ -18,9 +18,10 @@ export default class DashboarAdminsController {
             * 2 -> rejected
             */
         const data = ctx.request.all();
-        console.log(data)
-        const user = await User.query().where("id", "id")
-            .update(data);
+        const id = data.id;
+        const status = data.status;
+        const user = await User.query().where("id", id)
+            .update({ status: status });
         return user
     }
 }

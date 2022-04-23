@@ -63,11 +63,24 @@ export default {
 	},
 	methods: {
 		async accept(id) {
-			console.log("accept id = ", id);
-			// const accept=await  this.callApi("put","dashboard/update/status")
+			const accept = await this.callApi(
+				"put",
+				"dashboard/update/status",
+				{
+					id: id,
+					status: "1",
+				}
+			);
 		},
-		reject(id) {
-			console.log("reject called", id);
+		async reject(id) {
+			const reject = await this.callApi(
+				"put",
+				"dashboard/update/status",
+				{
+					id: id,
+					status: "2",
+				}
+			);
 		},
 	},
 };
