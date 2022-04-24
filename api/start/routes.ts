@@ -22,6 +22,7 @@ import Route from '@ioc:Adonis/Core/Route'
 
 import 'App/Controllers/Http/Auth/auth'
 import 'App/Controllers/Http/Dashboard/dashboard'
+import 'App/Controllers/Http/Profile/profile'
 Route.get('/', () => {
     return { message: 'You have landed in empty ocean!' }
 })
