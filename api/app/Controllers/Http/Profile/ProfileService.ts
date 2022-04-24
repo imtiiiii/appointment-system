@@ -1,7 +1,7 @@
 import ProfileQuery from "./ProfileQuery";
 
 export default class ProfileSevice {
-    private ProfileQuery : ProfileQuery
+    private profileQuery : ProfileQuery
     constructor(){
         this.profileQuery = new ProfileQuery();
     }
@@ -12,6 +12,6 @@ export default class ProfileSevice {
             id:authUserId,
             ...ctx.request.all()
         }
-        return await 
+        return await  this.profileQuery.profileUpdate(updateData);
     }
 }
