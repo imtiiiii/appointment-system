@@ -23,33 +23,81 @@
 				Add time slots
 			</button>
 		</div>
-		<div>
+		<div style="margin: 100px 50px">
 			<!-- <client-only>
 				<date-picker v-model="date_today" format="HH:MM" />
 			</client-only> -->
-			<vue-timepicker v-model="date_today"></vue-timepicker>
-		</div>
-		<div>
-			<button v-on:click="time">check</button>
+			<!-- <vue-timepicker v-model="date_today"></vue-timepicker> -->
+			<div class="_log_form_main">
+				<h2 class="_log_form_title">Add available time slots</h2>
+
+				<div class="_log_form">
+					<div class="_log_input_group">
+						<Select
+							placeholder="Select Day"
+							size="large"
+							v-model="day"
+						>
+							<Option value="1">sunday</Option>
+							<Option value="2">monday</Option>
+							<Option value="3">tueday</Option>
+							<Option value="4">wednesday</Option>
+							<Option value="5">thursday</Option>
+							<Option value="6">Friday</Option>
+							<Option value="7">Satarday</Option>
+						</Select>
+					</div>
+					<div class="_log_input_group">
+						<vue-timepicker
+							placeholder="start-time"
+							v-model="startTime"
+						></vue-timepicker>
+					</div>
+					<div class="_log_input_group">
+						<vue-timepicker
+							placeholder="end-time"
+							v-model="endTime"
+						></vue-timepicker>
+					</div>
+					<div class="_log_button">
+						<Button
+							@click="addSlot"
+							type="success"
+							size="large"
+							long
+							>Add</Button
+						>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
 import VueTimepicker from "vue2-timepicker/src/vue-timepicker.vue";
-
+import "vue2-timepicker/dist/VueTimepicker.css";
 export default {
 	components: {
 		"vue-timepicker": VueTimepicker,
 	},
 	data() {
 		return {
-			date_today: "",
+			day: "",
+			startTime: "",
+			endTime: "",
+			user: null,
 		};
 	},
+	created() {
+		this.user = this.$store.state.authUser;
+		console.log(this.user);
+	},
 	methods: {
-		time() {
-			console.log(this.date_today);
+		addSlot() {
+			console.log(this.day);
+			console.log(this.startTime);
+			console.log(this.endTime);
 		},
 	},
 };

@@ -97,17 +97,19 @@
 				</div> -->
 
 				<!-- ********* GENDER SELECT *********** -->
-				<!-- <div class="_log_input_group">
-					<Select
-						placeholder="Please select your gender"
-						size="large"
-						v-model="form.gender"
+				<!-- 
+                    <div class="_log_input_group">
+					    <Select
+						    placeholder="Please select your gender"
+						    size="large"
+						    v-model="form.gender"
 					>
 						<Option value="Female">Female</Option>
 						<Option value="Male">Male</Option>
 						<Option value="Other">Other</Option>
 					</Select>
-				</div> -->
+				</div>
+                 -->
 				<!-- ******** TERMS AND CONDITION ******** -->
 				<!-- <div class="_log_input_group">
 					<Checkbox v-model="form.agree" size="small" border>
