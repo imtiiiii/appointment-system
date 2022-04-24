@@ -191,13 +191,13 @@ export default {
 				"http://localhost:3333/auth/register",
 				this.form
 			);
-			// if (regReq.status === 200) {
-			// 	this.clearData();
-			// 	return this.s("Your registration requested submitted");
-			// } else {
-			// 	return this.e("something went wrong please try again");
-			// }
-			console.log(this.form);
+			if (regReq.status === 200) {
+				this.clearData();
+				return this.s("Your registration requested submitted");
+			} else {
+				return this.e("something went wrong please try again");
+			}
+			// console.log(this.form);
 		},
 
 		clearData() {
