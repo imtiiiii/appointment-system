@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import adminDashboard from "../components/adminDashboard.vue";
+import adminDashboard from "../components/adminDashboard/adminDashboard.vue";
 import TeacherDashboard from "../components/teacherDashboard.vue";
 export default {
 	middleware: "auth",

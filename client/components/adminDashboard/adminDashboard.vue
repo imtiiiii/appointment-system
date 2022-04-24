@@ -56,10 +56,10 @@
 </template>
 
 <script>
-import Register from "./register.vue";
-import pendingRequestVue from "./pendingRequest.vue";
-import StudentList from "./studentList.vue";
-import TeacherList from "./teacherList.vue";
+import Register from "../register.vue";
+import pendingRequestVue from "../adminDashboard/pendingRequest.vue";
+import StudentList from "../adminDashboard/studentList.vue";
+import TeacherList from "../adminDashboard/teacherList.vue";
 export default {
 	components: {
 		"pending-request": pendingRequestVue,
