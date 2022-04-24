@@ -170,9 +170,9 @@ export default {
 			if (this.form.userType === "") {
 				return this.i("Please choose your identity");
 			}
-			if (this.form.dept === "" || this.form.dept === null) {
-				return this.i("Please choose your Depertment");
-			}
+			// if (this.form.dept === "" || this.form.dept === null) {
+			// 	return this.i("Please choose your Depertment");
+			// }
 			if (
 				(this.form.userType === "student" &&
 					this.form.studentId === null) ||
@@ -191,12 +191,13 @@ export default {
 				"http://localhost:3333/auth/register",
 				this.form
 			);
-			if (regReq.status === 200) {
-				this.clearData();
-				return this.s("Your registration requested submitted");
-			} else {
-				return this.e("something went wrong please try again");
-			}
+			// if (regReq.status === 200) {
+			// 	this.clearData();
+			// 	return this.s("Your registration requested submitted");
+			// } else {
+			// 	return this.e("something went wrong please try again");
+			// }
+			console.log(this.form);
 		},
 
 		clearData() {
