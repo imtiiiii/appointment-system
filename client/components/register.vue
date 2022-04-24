@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div style="margin-top: 90px">
 		<!-- Form -->
 		<div class="_log_form_main">
 			<h2 class="_log_form_title">Sign Up</h2>
@@ -134,7 +134,6 @@
 
 <script>
 export default {
-	midleware: "guest",
 	data() {
 		return {
 			form: {

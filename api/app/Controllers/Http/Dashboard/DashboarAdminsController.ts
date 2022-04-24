@@ -24,4 +24,16 @@ export default class DashboarAdminsController {
             .update({ status: status });
         return user
     }
+    // get all students list
+    public async studentList(ctx: HttpContextContract) {
+        const users = await User.query().where("user_type", "student");
+        return users;
+
+    }
+    // get all teachers list
+    public async teacherList(ctx: HttpContextContract) {
+        const users = await User.query().where("user_type", "teacher");
+        return users;
+
+    }
 }
