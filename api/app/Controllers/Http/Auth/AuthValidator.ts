@@ -33,7 +33,7 @@ export default class AuthValidator {
             ]),
             userType: schema.enum(['student', 'teacher', 'admin'] as const),
             studentId: schema.number.optional(),
-            dept: schema.string({ trim: true })
+            dept: schema.string.optional({ trim: true })
 
 
         })
