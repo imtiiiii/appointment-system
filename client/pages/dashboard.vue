@@ -13,7 +13,8 @@
 
 <script>
 import adminDashboard from "../components/adminDashboard/adminDashboard.vue";
-import TeacherDashboard from "../components/teacherDashboard.vue";
+import TeacherDashboard from "../components/teacherDashboard/teacherDashboard.vue";
+
 export default {
 	middleware: "auth",
 	components: { adminDashboard, TeacherDashboard },
