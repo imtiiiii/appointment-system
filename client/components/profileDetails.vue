@@ -8,7 +8,14 @@
 			<h4>Last Name: {{ userDetails.last_name }}</h4>
 			<h4>Email: {{ userDetails.email }}</h4>
 			<h4>Type: {{ userDetails.user_type }}</h4>
-			<h4>Dept: {{ userDetails.dept }}</h4>
+			<h4
+				v-if="
+					userDetails.user_type === 'teacher' ||
+					userDetails.user_type === 'student'
+				"
+			>
+				Dept: {{ userDetails.dept }}
+			</h4>
 			<h4 v-if="userDetails.course">Course: {{ userDetails.course }}</h4>
 			<h4 v-if="userDetails.student_id">
 				Student Id: {{ userDetails.student_id }}

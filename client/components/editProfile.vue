@@ -5,21 +5,30 @@
 		<div style="margin-left: 10px">
 			<div>
 				<label for="">First Name: </label>
-				<input type="text" v-model="userInfo.firstName" />
+				<input type="text" v-model="userInfo.first_name" />
 			</div>
 			<div>
 				<label for="">Last Name: </label>
-				<input type="text" v-model="userInfo.lastName" />
+				<input type="text" v-model="userInfo.last_name" />
 			</div>
 			<div>
+				<label for="">Email: </label>
+				<input type="text" v-model="userInfo.email" />
+			</div>
+			<div
+				v-if="
+					userInfo.user_type === 'teacher' ||
+					userInfo.user_type === 'student'
+				"
+			>
 				<label for="">Depertment </label>
 				<input type="text" v-model="userInfo.dept" />
 			</div>
-			<div>
+			<div v-if="userInfo.user_type === 'teacher'">
 				<label for="">Course: </label>
 				<input type="text" v-model="userInfo.course" />
 			</div>
-			<div>
+			<div v-if="userInfo.user_type === 'student'">
 				<label for="">Student Id: </label>
 				<input type="text" v-model="userInfo.studentId" />
 			</div>
@@ -34,14 +43,17 @@ export default {
 	data() {
 		return {
 			// userInfo:this.$store.state.authUser,
-			userInfo: {
-				firstName: this.$store.state.authUser.first_name,
-				lastName: this.$store.state.authUser.last_name,
-				dept: this.$store.state.authUser.dept,
-				course: this.$store.state.authUser.course,
-				studentId: this.$store.state.authUser.student_id,
-			},
+			userInfo: {},
 		};
+	},
+	async created() {
+		// console.log("edit profile props=", this.userId);
+		const user = await this.callApi("get", `profile/${this.userId}`);
+		// console.log("user=", user);
+		if (user.status === 200) {
+			this.userInfo = user.data;
+			console.log("user info ", this.userInfo);
+		}
 	},
 	methods: {
 		async updateUser() {
