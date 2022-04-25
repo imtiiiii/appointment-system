@@ -16,6 +16,7 @@
 import profileDetails from '../../components/profileDetails.vue'
 import editProfile from '../../components/editProfile.vue'
 export default {
+    middleware:'auth',
     components:{
         'profile-details': profileDetails,
         'edit-profile': editProfile,
