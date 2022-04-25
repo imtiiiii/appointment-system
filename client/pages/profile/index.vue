@@ -28,7 +28,7 @@ export default {
     },
     async created(){
         this.userId = this.$store.state.authUser.id;
-        console.log(this.userId);
+        // console.log(this.userId);
     }
 }
 </script>

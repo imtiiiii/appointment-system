@@ -26,7 +26,7 @@ export default {
     async created(){
         const {data} = await this.callApi('get',`/profile/${this.userId}`);
         this.userDetails = data;
-        console.log(this.userDetails);
+        // console.log(this.userDetails);
     }
 }
 </script>

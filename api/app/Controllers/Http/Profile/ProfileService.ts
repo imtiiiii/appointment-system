@@ -7,7 +7,7 @@ export default class ProfileSevice {
     }
     async profileUpdate(ctx){
         const authUserId = (ctx.auth.user).toJSON().id;
-        console.log(authUserId);
+        // console.log(authUserId);
         const updateData = {
             id:authUserId,
             ...ctx.request.all()
