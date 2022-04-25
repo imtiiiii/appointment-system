@@ -23,63 +23,72 @@
 				Add time slots
 			</button>
 		</div>
-		<div style="margin: 100px 50px">
-			<!-- <client-only>
-				<date-picker v-model="date_today" format="HH:MM" />
-			</client-only> -->
-			<!-- <vue-timepicker v-model="date_today"></vue-timepicker> -->
-			<div class="_log_form_main">
-				<h2 class="_log_form_title">Add available time slots</h2>
+		<div style="display:flex">
+			<created-slot></created-slot>
+			<div style="margin: 100px 50px; width:50%">
+				<!-- <client-only>
+					<date-picker v-model="date_today" format="HH:MM" />
+				</client-only> -->
+				<!-- <vue-timepicker v-model="date_today"></vue-timepicker> -->
+				<div class="_log_form_main">
+					<h2 class="_log_form_title">Add available time slots</h2>
 
-				<div class="_log_form">
-					<div class="_log_input_group">
-						<Select
-							placeholder="Select Day"
-							size="large"
-							v-model="day"
-						>
-							<Option value="1">sunday</Option>
-							<Option value="2">monday</Option>
-							<Option value="3">tueday</Option>
-							<Option value="4">wednesday</Option>
-							<Option value="5">thursday</Option>
-							<Option value="6">Friday</Option>
-							<Option value="7">Satarday</Option>
-						</Select>
-					</div>
-					<div class="_log_input_group">
-						<vue-timepicker
-							placeholder="start-time"
-							v-model="startTime"
-						></vue-timepicker>
-					</div>
-					<div class="_log_input_group">
-						<vue-timepicker
-							placeholder="end-time"
-							v-model="endTime"
-						></vue-timepicker>
-					</div>
-					<div class="_log_button">
-						<Button
-							@click="addSlot"
-							type="success"
-							size="large"
-							long
-							>Add</Button
-						>
+					<div class="_log_form">
+						<div class="_log_input_group">
+							<Select
+								placeholder="Select Day"
+								size="large"
+								v-model="day"
+							>
+								<Option value="1">sunday</Option>
+								<Option value="2">monday</Option>
+								<Option value="3">tueday</Option>
+								<Option value="4">wednesday</Option>
+								<Option value="5">thursday</Option>
+								<Option value="6">Friday</Option>
+								<Option value="7">Satarday</Option>
+							</Select>
+						</div>
+						<div class="_log_input_group">
+							<vue-timepicker
+								placeholder="start-time"
+								v-model="startTime"
+							></vue-timepicker>
+						</div>
+						<div class="_log_input_group">
+							<vue-timepicker
+								placeholder="end-time"
+								v-model="endTime"
+							></vue-timepicker>
+						</div>
+						<div class="_log_button">
+							<Button
+								@click="addSlot"
+								type="success"
+								size="large"
+								long
+								>Add</Button
+							>
+						</div>
 					</div>
 				</div>
 			</div>
+			<div style="margin: 100px 50px">
+				<h2>Available Slots</h2>
+			</div>
 		</div>
+		
 	</div>
 </template>
 
 <script>
 import VueTimepicker from "vue2-timepicker/src/vue-timepicker.vue";
 import "vue2-timepicker/dist/VueTimepicker.css";
+import createdSlot from './createdSlots.vue';
 export default {
 	components: {
 		"vue-timepicker": VueTimepicker,
+		"created-slot": createdSlot,
 	},
 	data() {
 		return {

@@ -17,9 +17,9 @@ export default class TimeSlotsController {
         return time;
     }
     //TODO: This Controller only accessable by teacher type user
-    public async availableSlots(ctx:HttpContextContract){
+    public async created(ctx:HttpContextContract){
         try{
-            const payload = await this.timeSlotValidator.availableSlots(ctx);
+            const payload = await this.timeSlotValidator.created(ctx);
         }catch(error){
             const errorObject = JSON.parse(error);
             return ctx.response.status(422).send({
@@ -28,6 +28,6 @@ export default class TimeSlotsController {
                 result:[]
             });
         }
-        return await this.timeSlotService.availableSlots(ctx);
+        return await this.timeSlotService.created(ctx);
     }
 }

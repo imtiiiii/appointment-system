@@ -60,7 +60,7 @@ export default {
     data(){
        return{
           form : {
-              uid : 'testuser1@gmail.com',
+              uid : 'testuser2@gmail.com',
               password : 'testuser',
 
           },

@@ -2,7 +2,7 @@ import {schema,rules} from '@ioc:Adonis/Core/Validator'
 import {HttpContextContract} from '@ioc:Adonis/Core/HttpContext'
 
 export default class TimeSlotValidator {
-    public async availableSlots(ctx:HttpContextContract){
+    public async created(ctx:HttpContextContract){
         const availableSlotSchema = schema.create({
             day: schema.number()
         });
