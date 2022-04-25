@@ -1,38 +1,98 @@
 <template>
 	<div>
-		<h2>Edit Profile Page: {{ userId }}</h2>
+		<h2>Edit Profile Page</h2>
 		<hr />
-		<div style="margin-left: 10px">
-			<div>
-				<label for="">First Name: </label>
-				<input type="text" v-model="userInfo.first_name" />
+		<div style="width: 50%">
+			<div class="_log_form">
+				<div class="_log_input_group">
+					<Label>First Name:</Label>
+					<Input
+						placeholder="First Name"
+						size="large"
+						type="text"
+						v-model="userInfo.first_name"
+					></Input>
+				</div>
+				<div class="_log_input_group">
+					<Label>Last Name:</Label>
+					<Input
+						placeholder="Last Name"
+						size="large"
+						type="text"
+						v-model="userInfo.last_name"
+					></Input>
+				</div>
+				<div class="_log_input_group">
+					<Label>Email:</Label>
+					<Input
+						v-model="userInfo.email"
+						placeholder="Email"
+						size="large"
+						type="text"
+					></Input>
+				</div>
+				<div
+					class="_log_input_group"
+					v-if="
+						userInfo.user_type === 'teacher' ||
+						userInfo.user_type === 'student'
+					"
+				>
+					<Label>Depertment:</Label>
+					<Input
+						v-model="userInfo.dept"
+						placeholder="Depertment"
+						size="large"
+						type="text"
+					></Input>
+				</div>
+				<div
+					class="_log_input_group"
+					v-if="userInfo.user_type === 'teacher'"
+				>
+					<Label>Course Name:</Label>
+					<Input
+						v-model="userInfo.course"
+						placeholder="Course"
+						size="large"
+						type="text"
+					></Input>
+				</div>
+				<div
+					class="_log_input_group"
+					v-if="userInfo.user_type === 'student'"
+				>
+					<Label>Student ID:</Label>
+					<Input
+						v-model="userInfo.student_id"
+						placeholder="Student ID"
+						size="large"
+						type="text"
+					></Input>
+				</div>
+				<div
+					class="_log_input_group"
+					v-if="this.$store.state.authUser.user_type === 'admin'"
+				>
+					<Label>User Status:</Label>
+					<Input
+						v-model="userInfo.status"
+						placeholder="status"
+						size="large"
+						type="text"
+					></Input>
+				</div>
+
+				<div class="_log_button">
+					<Button
+						v-on:click="updateUser"
+						type="success"
+						size="large"
+						long
+						>Update</Button
+					>
+				</div>
 			</div>
-			<div>
-				<label for="">Last Name: </label>
-				<input type="text" v-model="userInfo.last_name" />
-			</div>
-			<div>
-				<label for="">Email: </label>
-				<input type="text" v-model="userInfo.email" />
-			</div>
-			<div
-				v-if="
-					userInfo.user_type === 'teacher' ||
-					userInfo.user_type === 'student'
-				"
-			>
-				<label for="">Depertment </label>
-				<input type="text" v-model="userInfo.dept" />
-			</div>
-			<div v-if="userInfo.user_type === 'teacher'">
-				<label for="">Course: </label>
-				<input type="text" v-model="userInfo.course" />
-			</div>
-			<div v-if="userInfo.user_type === 'student'">
-				<label for="">Student Id: </label>
-				<input type="text" v-model="userInfo.studentId" />
-			</div>
-			<button v-on:click="updateUser">Update</button>
 		</div>
 	</div>
 </template>

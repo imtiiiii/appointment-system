@@ -1,6 +1,6 @@
 <template>
-	<div>
-		<h2>Profile Details {{ userDetails.id }}</h2>
+	<div style="margin-top: 20px">
+		<h2 style="margin: 20px 10px">Profile Details</h2>
 		<hr />
 		<div>
 			<h4 style="margin: 20px 10px">

@@ -1,6 +1,5 @@
 <template>
 	<div style="background-color: #9cb0ba; margin: 10px 30px">
-		{{ userId }}
 		<profile-details
 			v-bind:userId="this.$route.params.id"
 		></profile-details>
