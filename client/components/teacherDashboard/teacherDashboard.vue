@@ -23,9 +23,9 @@
 				Add time slots
 			</button>
 		</div>
-		<div style="display:flex">
+		<div style="display: flex">
 			<created-slot></created-slot>
-			<div style="margin: 100px 50px; width:50%">
+			<div style="margin: 100px 50px; width: 50%">
 				<!-- <client-only>
 					<date-picker v-model="date_today" format="HH:MM" />
 				</client-only> -->
@@ -77,14 +77,13 @@
 				<h2>Available Slots</h2>
 			</div>
 		</div>
-		
 	</div>
 </template>
 
 <script>
 import VueTimepicker from "vue2-timepicker/src/vue-timepicker.vue";
 import "vue2-timepicker/dist/VueTimepicker.css";
-import createdSlot from './createdSlots.vue';
+import createdSlot from "./createdSlots.vue";
 export default {
 	components: {
 		"vue-timepicker": VueTimepicker,
@@ -113,6 +112,8 @@ export default {
 				end_time: this.endTime,
 				day_id: this.day,
 			});
+			console.log(addToDb.data.msg);
+			// this.s(addToDb.data.msg);
 		},
 	},
 };
