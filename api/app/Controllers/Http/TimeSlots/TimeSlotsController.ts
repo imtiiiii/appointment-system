@@ -2,6 +2,8 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import TimeSlot from '../../../Models/TimeSlot'
 import TimeSlotValidator from './TimeSlotValidator';
 import TimeSlotService from './TimeSlotService';
+import moment from 'moment';
+moment().format();
 import User from 'App/Models/User';
 export default class TimeSlotsController {
     private timeSlotValidator: TimeSlotValidator
@@ -12,6 +14,10 @@ export default class TimeSlotsController {
         this.timeSlotValidator = new TimeSlotValidator()
     }
     public async add(ctx: HttpContextContract) {
+        let one = moment("16:00:00", "HH:mm:ss").valueOf().toString();
+        let two = moment("16:00:00", "HH:mm:ss").valueOf().toString()
+        console.log(one);
+        console.log(two);
         const data = ctx.request.all();
         const { day_id } = data;
         const { teacher_id } = data;
@@ -19,16 +25,16 @@ export default class TimeSlotsController {
         const { end_time } = data;
         // console.log("day_id= ", day_id)
         // console.log("teacher_id= ", teacher_id)
-        // console.log("start_time = ", start_time)
-        // console.log("end_time =", end_time)
-        const teacher = await TimeSlot.query().where("teacherId", teacher_id).where("day_id", day_id).orderBy("start_time", "desc").preload("user");
-        const newStartTime = new Date('2020-01-01 ' + start_time).getTime();
-        const newEndTime = new Date('2020-01-01 ' + end_time).getTime();
+        console.log("start_time = ", start_time)
+        console.log("end_time =", end_time)
+        const teacher = await TimeSlot.query().where("teacherId", teacher_id).where("dayId", day_id).orderBy("start_time", "desc").preload("user");
+        const newStartTime = moment(start_time, "HH:mm:ss").valueOf().toString();
+        const newEndTime = moment(end_time, "HH:mm:ss").valueOf().toString();
         for (let i of teacher) {
             // console.log("oldstartTime=", i)
             // console.log("endTime=", i.endTime)
-            const oldStartTime = new Date('2020-01-01 ' + i.startTime).getTime();
-            const oldEndTime = new Date('2020-01-01 ' + i.endTime).getTime();
+            const oldStartTime = moment(i.startTime, "HH:mm:ss").valueOf().toString();
+            const oldEndTime = moment(i.endTime, "HH:mm:ss").valueOf().toString();
             // *********** START TIME VALIDATION **********
             if (newStartTime === oldStartTime || newStartTime === oldEndTime) {
                 console.log("1")
@@ -65,9 +71,9 @@ export default class TimeSlotsController {
             }
             // ********** START AND END TIME BOTH **********
 
-            // ********* WHEN NEW START TIME IS AVAILABLE BUT END TIME CONFLICT WITH OTHER TIME SLOT'S START OR END TIME = NOT POSSIBLE *************
+            // ********* WHEN NEW START TIME IS AVAILABLE BUT END TIME CONFLICT WITH OTHER TIME SLOT'S START OR END TIME  = NOT POSSIBLE *************
             if (newStartTime < oldStartTime) {
-                if (newEndTime > oldStartTime && newEndTime < oldEndTime) {
+                if (newEndTime > oldStartTime) {
                     console.log("5")
                     return {
                         msg: "not possible"
@@ -85,9 +91,13 @@ export default class TimeSlotsController {
             }
 
         }
+        const saveToDb = await TimeSlot.create(data);
         return {
+            saveToDb,
             msg: "possible"
         }
+
+
 
     }
     //TODO: This Controller only accessable by teacher type user
@@ -105,8 +115,8 @@ export default class TimeSlotsController {
         return await this.timeSlotService.created(ctx);
     }
     //TODO: This Controller only accessable by teacher type user
-    public async available(ctx:HttpContextContract){
+    public async available(ctx: HttpContextContract) {
         return this.timeSlotService.available(ctx);
     }
-    
+
 }

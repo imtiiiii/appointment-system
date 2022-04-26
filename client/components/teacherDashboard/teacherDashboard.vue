@@ -85,13 +85,13 @@
 import VueTimepicker from "vue2-timepicker/src/vue-timepicker.vue";
 import "vue2-timepicker/dist/VueTimepicker.css";
 import createdSlot from "./createdSlots.vue";
-import availableSlots from './availableSlots.vue';
+import availableSlots from "./availableSlots.vue";
 
 export default {
 	components: {
 		"vue-timepicker": VueTimepicker,
 		"created-slot": createdSlot,
-		"available-slot": availableSlots
+		"available-slot": availableSlots,
 	},
 	data() {
 		return {
@@ -107,17 +107,17 @@ export default {
 	},
 	methods: {
 		async addSlot() {
-			console.log(this.day);
-			console.log(this.startTime);
-			console.log(this.endTime);
+			// console.log(this.day);
+			// console.log(this.startTime);
+			// console.log(this.endTime);
 			const addToDb = await this.callApi("post", "time-slots/add", {
 				teacher_id: this.user.id,
 				start_time: this.startTime,
 				end_time: this.endTime,
 				day_id: this.day,
 			});
-			console.log(addToDb.data.msg);
-			// this.s(addToDb.data.msg);
+			// console.log(addToDb.data.msg);
+			this.i(addToDb.data.msg);
 		},
 	},
 };
