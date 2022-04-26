@@ -1,4 +1,5 @@
 import TimeSlot from "App/Models/TimeSlot";
+import moment from 'moment';
 
 
 export default class TimeSlotQuery {
@@ -26,10 +27,34 @@ export default class TimeSlotQuery {
         }
         createdSlotsJSON.unshift(beginingTime);
         createdSlotsJSON.push(endTime);
-    //    console.log(createdSlotsJSON);
         let availableSlots = [];
-        for(let i=0;i<createdSlotsJSON.length - 1;i++){
-            console.log(createdSlotsJSON[i].end_time, createdSlotsJSON[i+1].start_time);
+        for(let i=0;i<createdSlotsJSON.length-1;i++){
+            
+
+            let endTime = moment(createdSlotsJSON[i].end_time,'HH:mm:ss');
+            
+            let startTime = moment(createdSlotsJSON[i+1].start_time,'HH:mm:ss');
+            
+            let dif = startTime.diff(endTime,'milliseconds');
+            /**
+             *  We take 3 minute as time gap to choose it available time slot
+             */
+            let timeThreshold = 3
+            if(dif> timeThreshold*60*1000){
+                endTime.add(1,'minutes');
+                startTime.subtract(1,'minutes');
+                const newStart = endTime.format('HH:mm:ss');
+                const newEnd = startTime.format('HH:mm:ss');
+                /**
+                 *  New Available Time Slot Object
+                 */
+                const obj = {
+                    'start_time': newStart,
+                    'end_time': newEnd,
+                }
+                availableSlots.push(obj);
+            }
         }
+        return availableSlots;
     }
 }
