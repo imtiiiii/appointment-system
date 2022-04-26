@@ -91,17 +91,23 @@ export default class TimeSlotsController {
 
     }
     //TODO: This Controller only accessable by teacher type user
-    // public async availableSlots(ctx: HttpContextContract) {
-    //     try {
-    //         const payload = await this.timeSlotValidator.availableSlots(ctx);
-    //     } catch (error) {
-    //         const errorObject = JSON.parse(error);
-    //         return ctx.response.status(422).send({
-    //             status: 'BAD',
-    //             message: errorObject,
-    //             result: []
-    //         });
-    //     }
-    //     return await this.timeSlotService.availableSlots(ctx);
-    // }
+    public async created(ctx: HttpContextContract) {
+        try {
+            const payload = await this.timeSlotValidator.created(ctx);
+        } catch (error) {
+            const errorObject = JSON.parse(error);
+            return ctx.response.status(422).send({
+                status: 'BAD',
+                message: errorObject,
+                result: []
+            });
+        }
+        return await this.timeSlotService.created(ctx);
+    }
+    //TODO: This Controller only accessable by teacher type user
+    public async available(ctx:HttpContextContract){
+        const qs = ctx.request.qs();
+        console.log()
+    }
+    
 }

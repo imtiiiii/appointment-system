@@ -8,8 +8,10 @@ export default class TimeSlot extends BaseModel {
     @column({ isPrimary: true })
     public id: number
 
+    // @column()
+    // public teacher_id: number
     @column()
-    public teacher_id: number
+    public teacherId : number
 
     @column()
     public dayId: number

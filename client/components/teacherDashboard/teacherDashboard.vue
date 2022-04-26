@@ -73,9 +73,10 @@
 					</div>
 				</div>
 			</div>
-			<div style="margin: 100px 50px">
+			<!-- <div style="margin: 100px 50px">
 				<h2>Available Slots</h2>
-			</div>
+			</div> -->
+			<available-slot></available-slot>
 		</div>
 	</div>
 </template>
@@ -84,10 +85,13 @@
 import VueTimepicker from "vue2-timepicker/src/vue-timepicker.vue";
 import "vue2-timepicker/dist/VueTimepicker.css";
 import createdSlot from "./createdSlots.vue";
+import availableSlots from './availableSlots.vue';
+
 export default {
 	components: {
 		"vue-timepicker": VueTimepicker,
 		"created-slot": createdSlot,
+		"available-slot": availableSlots
 	},
 	data() {
 		return {
@@ -99,7 +103,7 @@ export default {
 	},
 	created() {
 		this.user = this.$store.state.authUser;
-		console.log(this.user);
+		// console.log(this.user);
 	},
 	methods: {
 		async addSlot() {

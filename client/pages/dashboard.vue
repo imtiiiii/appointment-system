@@ -24,9 +24,9 @@ export default {
 		};
 	},
 	created() {
-		console.log("hello");
+		// console.log("hello");
 		this.user = this.$store.state.authUser;
-		console.log(this.user);
+		// console.log(this.user);
 	},
 };
 </script>
