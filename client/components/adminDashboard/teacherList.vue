@@ -63,7 +63,7 @@ export default {
 			console.log("erase id", id);
 		},
 		update(id) {
-			console.log("update id", id);
+			this.$router.push(`/profile/${id}`);
 		},
 	},
 };

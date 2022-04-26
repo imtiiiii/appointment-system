@@ -36,6 +36,23 @@ export default {
 	},
 	async created() {
 		this.userId = this.$route.params.id;
+		console.log("user type", this.$store.state.authUser.user_type);
+		console.log("user id", this.$store.state.authUser.id);
+		console.log("router id", this.userId);
+		if (
+			this.$store.state.authUser.user_type !== "admin" &&
+			this.$store.state.authUser.id !== this.userId
+		) {
+			this.$router.push("/profile");
+		}
+	},
+	mounted() {
+		// if (
+		// 	this.$store.state.authUser.user_type !== "admin" &&
+		// 	this.userId !== this.$store.state.authUser.id
+		// ) {
+		// 	this.$router.push("/profile");
+		// }
 	},
 };
 </script>
