@@ -1,12 +1,6 @@
 <template>
-	<div style="background-color: #9cb0ba; margin: 10px 30px">
+	<div style="background-color: #9cb0ba; margin: 10px 20px">
 		<profile-details v-bind:userId="userId"></profile-details>
-		<!-- <button
-			style="margin-top: 10px"
-			v-on:click="editProfile = !editProfile"
-		>
-			{{ editProfile ? "Undo" : "Edit Profile" }}
-		</button> -->
 		<div>
 			<button
 				v-on:click="editProfile = !editProfile"
