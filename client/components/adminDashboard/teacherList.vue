@@ -59,8 +59,10 @@ export default {
 		}
 	},
 	methods: {
-		erase(id) {
-			console.log("erase id", id);
+		async erase(id) {
+			const dlt = await this.callApi("delete", "/auth/delete", {
+				id,
+			});
 		},
 		update(id) {
 			this.$router.push(`/profile/${id}`);
