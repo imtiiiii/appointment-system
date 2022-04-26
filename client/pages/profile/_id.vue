@@ -1,14 +1,8 @@
 <template>
-	<div style="background-color: #9cb0ba; margin: 10px 30px">
+	<div style="background-color: #9cb0ba; margin: 10px 20px">
 		<profile-details
 			v-bind:userId="this.$route.params.id"
 		></profile-details>
-		<!-- <button
-			style="margin-top: 10px"
-			v-on:click="editProfile = !editProfile"
-		>
-			{{ editProfile ? "Undo" : "Edit Profile" }}
-		</button> -->
 		<div>
 			<button
 				v-on:click="editProfile = !editProfile"
@@ -16,7 +10,7 @@
 					background-color: #42cc8c;
 					width: 100px;
 					padding: 15px 0px;
-					margin: 10px 10px;
+					margin: 10px 20px;
 				"
 			>
 				{{ editProfile ? "Undo" : "Edit Profile" }}

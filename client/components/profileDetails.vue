@@ -1,6 +1,6 @@
 <template>
-	<div style="margin-top: 20px">
-		<h2 style="margin: 20px 10px">Profile Details</h2>
+	<div style="margin: 20px 20px">
+		<h2 style="margin: 20px 10px; padding: 10px 5px">Profile Details</h2>
 		<hr />
 		<div>
 			<h4 style="margin: 20px 10px">
