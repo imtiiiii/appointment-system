@@ -8,7 +8,7 @@
 					background-color: #42cc8c;
 					width: 100px;
 					padding: 15px 0px;
-					margin: 10px 10px;
+					margin: 10px 20px;
 				"
 			>
 				{{ editProfile ? "Undo" : "Edit Profile" }}
