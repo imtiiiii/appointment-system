@@ -53,7 +53,7 @@ export default {
     },
     watch:{
         async day(newValue,oldValue){
-            const {data} = await this.callApi('post','/time-slots/created',{day:newValue});
+            const {data} = await this.callApi('get',`/time-slots/available/?day=${newValue}`);
             this.availableSlots = data;
         }
     }
