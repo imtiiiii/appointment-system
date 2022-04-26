@@ -42,7 +42,7 @@ export default class TimeSlot extends BaseModel {
     // })
     // public byStudent : BelongsTo<typeof User>
     @belongsTo(() => User, {
-        foreignKey: "teacher_id"
+        foreignKey: "teacherId"
     })
     public user: BelongsTo<typeof User>
     @belongsTo(() => Day, {

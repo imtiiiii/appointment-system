@@ -15,4 +15,13 @@ export default class TimeSlotService {
         }
         return await this.timeSlotQuery.created(slotsFor);
     }
+    public async available(ctx){
+        // const authUserId = (ctx.auth.user).toJSON().id;
+        // const day_id = ctx.request.qs().day;
+        const availableSlotsFor = {
+            id: (ctx.auth.user).toJSON().id,
+            dayId: ctx.request.qs().day,
+        }
+        return this.timeSlotQuery.available(availableSlotsFor);
+    }
 }

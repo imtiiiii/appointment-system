@@ -21,7 +21,7 @@ export default class TimeSlotsController {
         // console.log("teacher_id= ", teacher_id)
         // console.log("start_time = ", start_time)
         // console.log("end_time =", end_time)
-        const teacher = await TimeSlot.query().where("teacher_id", teacher_id).where("day_id", day_id).orderBy("start_time", "desc").preload("user");
+        const teacher = await TimeSlot.query().where("teacherId", teacher_id).where("day_id", day_id).orderBy("start_time", "desc").preload("user");
         const newStartTime = new Date('2020-01-01 ' + start_time).getTime();
         const newEndTime = new Date('2020-01-01 ' + end_time).getTime();
         for (let i of teacher) {
@@ -106,8 +106,7 @@ export default class TimeSlotsController {
     }
     //TODO: This Controller only accessable by teacher type user
     public async available(ctx:HttpContextContract){
-        const qs = ctx.request.qs();
-        console.log()
+        return this.timeSlotService.available(ctx);
     }
     
 }
