@@ -25,6 +25,7 @@
 			<div v-if="date_today !== null && slots.length !== 0" class="slot">
 				<div v-for="(slot, index) of slots" :key="index">
 					<button
+						v-on:click="slotId(slot.id)"
 						class="update"
 						style="
 							background-color: #42cc8c;
@@ -34,6 +35,9 @@
 					>
 						{{ slot.start_time }}-{{ slot.end_time }}
 					</button>
+					<div v-if="choosedSlotId === slot.id">
+						<h3>heheeh hello</h3>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -51,12 +55,19 @@ export default {
 			id: this.$route.params.id,
 			date_today: null,
 			slots: [],
+			agenda: false,
+			choosedSlotId: null,
 		};
 	},
 	created() {
 		// console.log("created", this.date_today);
 	},
-	methods: {},
+	methods: {
+		slotId(id) {
+			this.choosedSlotId = id;
+			console.log("slot id called", this.choosedSlotId);
+		},
+	},
 	watch: {
 		timings: function () {
 			// console.log(" im from watch date  = ", this.date_today);
@@ -78,6 +89,8 @@ export default {
 					`time-slots?teacher_id=${this.id}&day_id=${day}`
 				);
 				this.slots = slots.data;
+				console.log(this.slots);
+				console.log(this.choosedSlotId);
 			}
 		},
 	},
@@ -87,7 +100,7 @@ export default {
 <style>
 .available-bookings {
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
+	grid-template-columns: repeat(3, 1fr, 2fr);
 	grid-row-gap: 26px;
 }
 .slot {

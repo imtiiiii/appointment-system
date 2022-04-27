@@ -4,7 +4,7 @@ import TimeSlotValidator from './TimeSlotValidator';
 import TimeSlotService from './TimeSlotService';
 import moment from 'moment';
 moment().format();
-import User from 'App/Models/User';
+// import User from 'App/Models/User';
 export default class TimeSlotsController {
     private timeSlotValidator: TimeSlotValidator
     private timeSlotService: TimeSlotService
@@ -103,7 +103,7 @@ export default class TimeSlotsController {
 
     public async slots(ctx: HttpContextContract) {
         const { teacher_id, day_id } = ctx.request.qs();
-        const all = await TimeSlot.query().where("teacherId", teacher_id).andWhere("dayId", day_id);
+        const all = await TimeSlot.query().where("teacherId", teacher_id).andWhere("dayId", day_id).orderBy("start_time", "asc")
         return all;
     }
 

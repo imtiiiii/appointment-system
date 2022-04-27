@@ -8,10 +8,13 @@ export default class Days extends BaseSchema {
             table.increments('id').primary()
             table.string('day_name').notNullable().unique()
             /**
-             * 1-sun,2-mon,3-tue
-             * 4-wed,5-thu,6-fri,7-sat
+             *1-mon,2-tue
+             * 3-wed,
+             * 4-thu,
+             * 5-fri,
+             * 6-sat,
+             * 7-sun,
              */
-
             /**
              * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
              */
