@@ -108,15 +108,15 @@ export default {
 	methods: {
 		async addSlot() {
 			// console.log(this.day);
-			// console.log(this.startTime);
-			// console.log(this.endTime);
+			console.log(this.startTime);
+			console.log(this.endTime);
 			const addToDb = await this.callApi("post", "time-slots/add", {
 				teacher_id: this.user.id,
 				start_time: this.startTime,
 				end_time: this.endTime,
 				day_id: this.day,
 			});
-			// console.log(addToDb.data.msg);
+			console.log(addToDb.data.msg);
 			this.i(addToDb.data.msg);
 		},
 	},

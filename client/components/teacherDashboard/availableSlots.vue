@@ -2,7 +2,7 @@
     <div style="margin: 100px 50px">
         <h2>Available Slots</h2>
         <hr>
-        <div v-if="availableSlots">
+        <div v-if="availableSlots.length">
             <table>
                 <tr>
                     <th>Start Time</th>
@@ -41,7 +41,7 @@ export default {
     data(){
         return {
             day:'',
-            availableSlots:null,
+            availableSlots:[],
         }
     },
     async created(){

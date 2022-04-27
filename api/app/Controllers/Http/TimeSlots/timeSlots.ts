@@ -4,4 +4,5 @@ Route.group(() => {
     Route.post("/add/", "TimeSlots/TimeSlotsController.add")
     Route.post("/created","TimeSlots/TimeSlotsController.created")
     Route.get('/available',"TimeSlots/TimeSlotsController.available")
+    Route.put('/update',"TimeSlots/TimeSlotsController.update")
 }).prefix("time-slots")

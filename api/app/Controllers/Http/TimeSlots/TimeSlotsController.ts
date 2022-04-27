@@ -119,4 +119,17 @@ export default class TimeSlotsController {
         return this.timeSlotService.available(ctx);
     }
 
+    public async update(ctx:HttpContextContract){
+        try{
+            await this.timeSlotValidator.update(ctx)
+        }catch(error){
+            const errorObj = JSON.parse(error);
+            return ctx.response.status(422).send({
+                status:'BAD',
+                message:errorObj,
+                result:[]
+            });
+        }
+        return this.timeSlotService.update(ctx);
+    }
 }

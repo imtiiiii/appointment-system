@@ -24,4 +24,26 @@ export default class TimeSlotService {
         }
         return this.timeSlotQuery.available(availableSlotsFor);
     }
+
+    public async update(ctx){
+        const authUserId = ctx.auth.user.id;
+        const updateFor = {...ctx.request.body()}
+        updateFor['userId'] = authUserId
+        
+        try {
+            await this.timeSlotQuery.update(updateFor);
+            return ctx.response.status(200).send({
+                status:'OK',
+                message:'Your Slot is updated successfully',
+                result:[],
+            });
+        } catch (error) {
+            const errorObj = JSON.parse(error);
+            return ctx.response.status(500).send({
+                status:'BAD',
+                message:errorObj,
+                result:[],
+            });
+        }
+    }
 }
