@@ -25,7 +25,7 @@
 		</div>
 		<div style="display: flex">
 			<created-slot></created-slot>
-			<div style="margin: 165px 50px; width: 100%; height:100%">
+			<div style="margin: 165px 50px; width: 100%; height: 100%">
 				<!-- <client-only>
 					<date-picker v-model="date_today" format="HH:MM" />
 				</client-only> -->
@@ -40,13 +40,13 @@
 								size="large"
 								v-model="day"
 							>
-								<Option value="1">sunday</Option>
-								<Option value="2">monday</Option>
-								<Option value="3">tueday</Option>
-								<Option value="4">wednesday</Option>
-								<Option value="5">thursday</Option>
-								<Option value="6">Friday</Option>
-								<Option value="7">Satarday</Option>
+								<Option value="1">monday</Option>
+								<Option value="2">tueday</Option>
+								<Option value="3">wednesday</Option>
+								<Option value="4">thursday</Option>
+								<Option value="5">Friday</Option>
+								<Option value="6">Satarday</Option>
+								<Option value="7">sunday</Option>
 							</Select>
 						</div>
 						<div class="_log_input_group">

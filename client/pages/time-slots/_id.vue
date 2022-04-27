@@ -11,7 +11,9 @@
 			<profile-details v-bind:userId="id"></profile-details>
 		</div>
 		<hr />
-		<h3>Look for appointments:</h3>
+		<h3 style="text-align: center; margin-bottom: 80px">
+			Look for available appointment scheducles:
+		</h3>
 		<div class="available-bookings">
 			<div>
 				<client-only>
@@ -36,7 +38,24 @@
 						{{ slot.start_time }}-{{ slot.end_time }}
 					</button>
 					<div v-if="choosedSlotId === slot.id">
-						<h3>heheeh hello</h3>
+						<div class="_log_input_group">
+							<Input
+								placeholder="agenda in short"
+								size="large"
+								type="text"
+							></Input>
+							<!-- *********** -->
+							<button
+								class="update"
+								style="
+									background-color: #e182af;
+
+									padding: 15px 10px;
+								"
+							>
+								send request
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -100,12 +119,13 @@ export default {
 <style>
 .available-bookings {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr, 2fr);
+	grid-template-columns: 1fr 2fr;
 	grid-row-gap: 26px;
 }
 .slot {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	grid-row-gap: 20px;
+	grid-column-gap: 20px;
 }
 </style>
