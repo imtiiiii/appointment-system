@@ -1,6 +1,6 @@
 <template>
-    <div style="margin: 100px 50px">
-        <h2>Available Slots</h2>
+    <div style="margin: 100px 50px; width:40%;" class="_log_form_main">
+        <h2 class="_log_form_title">Available Slots</h2>
         <hr>
         <div v-if="availableSlots.length">
             <table>

@@ -25,7 +25,7 @@
 		</div>
 		<div style="display: flex">
 			<created-slot></created-slot>
-			<div style="margin: 100px 50px; width: 50%">
+			<div style="margin: 165px 50px; width: 100%; height:100%">
 				<!-- <client-only>
 					<date-picker v-model="date_today" format="HH:MM" />
 				</client-only> -->

@@ -1,17 +1,34 @@
 <template>
-    <div style="margin: 100px 50px">
-        <h2>Created Slots</h2>
-        <hr>
+    <div style="margin: 100px 50px; width:40%;" class="_log_form_main">
+        <h2 class="_log_form_title">Created Slots</h2>
         <div v-if="createdSlots.length">
             <table>
                 <tr>
                     <th>Start Time</th>
                     <th>End Time</th>
-                    <!-- <th>Country</th> -->
+                    <th>Options</th>
                 </tr>
                 <tr v-for="(item,index) in createdSlots" :key="index">
-                    <td>{{item.start_time}}</td>
-                    <td>{{item.end_time}}</td>
+                    <td v-if="editFor !== item.id">{{item.start_time}}</td>
+                    <td v-if="editFor === item.id">
+                        <vue-timepicker
+                            placeholder="start-time"
+                            v-model="startTime"
+                        ></vue-timepicker>
+                    </td>
+                    <td v-if="editFor !== item.id">{{item.end_time}}</td>
+                    <td v-if="editFor === item.id">
+                        <vue-timepicker
+                            placeholder="end-time"
+                            v-model="endTime"
+                        ></vue-timepicker>
+                    </td>
+                    <td>
+                        <button v-on:click="edit(item.id)">Edit</button>
+                        <button v-on:click="update(item.id)">Update</button>
+                        <button v-on:click="deleteSlot(item.id)">Delete</button>
+
+                    </td>
                 </tr>
             </table>
         </div>
@@ -37,11 +54,19 @@
     </div>
 </template>
 <script>
+import VueTimepicker from "vue2-timepicker/src/vue-timepicker.vue";
+import "vue2-timepicker/dist/VueTimepicker.css";
 export default {
+    components:{
+        "vue-timepicker": VueTimepicker,
+    },
     data(){
         return {
             day:'',
+            startTime: "",
+			endTime: "",
             createdSlots:[],
+            editFor:-1,
         }
     },
     async created(){
@@ -55,6 +80,34 @@ export default {
         async day(newValue,oldValue){
             const {data} = await this.callApi('post','/time-slots/created',{day:newValue});
             this.createdSlots = data;
+        }
+    },
+    methods:{
+        deleteSlot:function(slotId){
+            console.log('Delete func')
+            console.log(slotId);
+        },
+        edit(slotId){
+            if(slotId === this.editFor){
+                this.editFor = -1;
+            }else{
+                this.editFor = slotId;
+            }
+            
+        },
+        async update(slotId){
+            const reqData = {
+                dayId:this.day,
+                slotId:slotId,
+                newStartTime:this.startTime+':00',
+                newEndTime:this.endTime+':00',
+            }
+            try{
+                await this.$axios.$put('/time-slots/update',reqData);
+                this.i('Updated Successfully');
+            }catch(error){
+                this.i('Slot conflicting')
+            }
         }
     }
 }
