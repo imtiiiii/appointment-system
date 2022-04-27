@@ -76,7 +76,8 @@ export default class TimeSlotQuery {
         }
         return false;
     }
-    
+
+    //TODO: Have some bug
     public async update(updateFor){
         try {
             const allCreatedSlots = await this.created({
@@ -167,6 +168,10 @@ export default class TimeSlotQuery {
             const errorStringifyObj = JSON.stringify(error.messages);
             throw errorStringifyObj
         }
+    }
+
+    public async delete(deleteData){
+        return await TimeSlot.query().where('id',deleteData.slotId).andWhere('teacherId',deleteData.userId).delete();
     }
 }
 

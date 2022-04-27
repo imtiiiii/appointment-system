@@ -46,4 +46,15 @@ export default class TimeSlotService {
             });
         }
     }
+
+    public async delete(ctx){
+        const authUserId = ctx.auth.user.id;
+        const slotId = ctx.request.qs().slotId;
+        const deleteData={
+            userId: ctx.auth.user.id,
+            slotId: ctx.request.qs().slotId,
+        }
+        return this.timeSlotQuery.delete(deleteData);
+
+    }
 }

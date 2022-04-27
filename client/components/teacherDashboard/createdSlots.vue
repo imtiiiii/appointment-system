@@ -24,10 +24,9 @@
                         ></vue-timepicker>
                     </td>
                     <td>
-                        <button v-on:click="edit(item.id)">Edit</button>
+                        <button v-on:click="edit(item.id)">{{editFor === item.id ? 'Undo':'Edit'}}</button>
                         <button v-on:click="update(item.id)">Update</button>
-                        <button v-on:click="deleteSlot(item.id)">Delete</button>
-
+                        <button v-on:click="deleteSlot(item.id,index)">Delete</button>
                     </td>
                 </tr>
             </table>
@@ -83,9 +82,10 @@ export default {
         }
     },
     methods:{
-        deleteSlot:function(slotId){
-            console.log('Delete func')
-            console.log(slotId);
+        async deleteSlot(slotId,index){
+            const resData = await this.callApi('delete',`/time-slots/delete/?slotId=${slotId}`)
+            this.i('Slot is deleted successfully')
+            this.createdSlots.splice(index,1);
         },
         edit(slotId){
             if(slotId === this.editFor){

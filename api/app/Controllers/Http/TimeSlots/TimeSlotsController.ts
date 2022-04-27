@@ -126,6 +126,7 @@ export default class TimeSlotsController {
         return this.timeSlotService.available(ctx);
     }
 
+    //TODO: This controller only accessable by teacher
     public async update(ctx: HttpContextContract) {
         try {
             await this.timeSlotValidator.update(ctx)
@@ -139,4 +140,10 @@ export default class TimeSlotsController {
         }
         return this.timeSlotService.update(ctx);
     }
+
+    //TODO: This controller only accessable by teacher
+    public async delete(ctx:HttpContextContract){
+        return this.timeSlotService.delete(ctx);
+    }
+    
 }

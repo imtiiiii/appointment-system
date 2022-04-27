@@ -6,4 +6,5 @@ Route.group(() => {
     Route.get('/available', "TimeSlots/TimeSlotsController.available")
     Route.put('/update', "TimeSlots/TimeSlotsController.update")
     Route.get("/", "TimeSlots/TimeSlotsController.slots")
+    Route.delete('/delete',"TimeSlots/TimeSlotsController.delete")
 }).prefix("time-slots")
