@@ -11,15 +11,31 @@
 			<profile-details v-bind:userId="id"></profile-details>
 		</div>
 		<hr />
-		<div>
-			<h3>Look for appointments:</h3>
+		<h3>Look for appointments:</h3>
+		<div class="available-bookings">
 			<div>
-				<button v-on:click="chk()">check!!!!!!!</button>
+				<client-only>
+					<date-picker
+						:inline="true"
+						v-model="date_today"
+						format="D"
+					/>
+				</client-only>
 			</div>
-			<client-only>
-				<h1>??????</h1>
-				<date-picker :inline="true" v-model="date_today" format="D" />
-			</client-only>
+			<div v-if="date_today !== null && slots.length !== 0" class="slot">
+				<div v-for="(slot, index) of slots" :key="index">
+					<button
+						class="update"
+						style="
+							background-color: #42cc8c;
+							width: 100%;
+							padding: 15px 0px;
+						"
+					>
+						{{ slot.start_time }}-{{ slot.end_time }}
+					</button>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -34,32 +50,34 @@ export default {
 		return {
 			id: this.$route.params.id,
 			date_today: null,
+			slots: [],
 		};
 	},
 	created() {
 		// console.log("created", this.date_today);
 	},
-	methods: {
-		chk() {
-			let date = moment(this.date_today).format("DD MMM YYYY");
-			let day = moment(this.date_today).isoWeekday();
-			// let x = this.date_today.getDay();
-
-			// console.log(x.toString());
-		},
-	},
+	methods: {},
 	watch: {
-		con: function () {
+		timings: function () {
 			// console.log(" im from watch date  = ", this.date_today);
 		},
 	},
 	computed: {
-		con() {
+		async timings() {
 			if (this.date_today !== null) {
 				let date = moment(this.date_today).format("DD MMM YYYY");
 				let day = moment(this.date_today).isoWeekday();
 				console.log(date.toString());
 				console.log(day.toString());
+				const data = {
+					teacher_id: this.id,
+					day_id: day,
+				};
+				const slots = await this.callApi(
+					"get",
+					`time-slots?teacher_id=${this.id}&day_id=${day}`
+				);
+				this.slots = slots.data;
 			}
 		},
 	},
@@ -67,4 +85,14 @@ export default {
 </script>
 
 <style>
+.available-bookings {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-row-gap: 26px;
+}
+.slot {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-row-gap: 20px;
+}
 </style>

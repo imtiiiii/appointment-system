@@ -100,6 +100,13 @@ export default class TimeSlotsController {
 
 
     }
+
+    public async slots(ctx: HttpContextContract) {
+        const { teacher_id, day_id } = ctx.request.qs();
+        const all = await TimeSlot.query().where("teacherId", teacher_id).andWhere("dayId", day_id);
+        return all;
+    }
+
     //TODO: This Controller only accessable by teacher type user
     public async created(ctx: HttpContextContract) {
         try {
@@ -119,15 +126,15 @@ export default class TimeSlotsController {
         return this.timeSlotService.available(ctx);
     }
 
-    public async update(ctx:HttpContextContract){
-        try{
+    public async update(ctx: HttpContextContract) {
+        try {
             await this.timeSlotValidator.update(ctx)
-        }catch(error){
+        } catch (error) {
             const errorObj = JSON.parse(error);
             return ctx.response.status(422).send({
-                status:'BAD',
-                message:errorObj,
-                result:[]
+                status: 'BAD',
+                message: errorObj,
+                result: []
             });
         }
         return this.timeSlotService.update(ctx);
