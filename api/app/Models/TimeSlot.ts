@@ -1,8 +1,9 @@
 import { DateInput, DateTime, } from 'luxon'
 import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import User from './User'
-import Appoinment from './Appoinment'
+
 import Day from './Day'
+import Appointment from '../Models/Appointment'
 
 export default class TimeSlot extends BaseModel {
     @column({ isPrimary: true })
@@ -11,7 +12,7 @@ export default class TimeSlot extends BaseModel {
     // @column()
     // public teacher_id: number
     @column()
-    public teacherId : number
+    public teacherId: number
 
     @column()
     public dayId: number
@@ -50,9 +51,9 @@ export default class TimeSlot extends BaseModel {
     })
     public day: BelongsTo<typeof Day>
 
-    @hasMany(() => Appoinment, {
+    @hasMany(() => Appointment, {
         foreignKey: 'timeSlotId'
     })
-    public allAppoinments: HasMany<typeof Appoinment>
+    public allAppointment: HasMany<typeof Appointment>
 
 }

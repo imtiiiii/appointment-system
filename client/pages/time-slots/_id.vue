@@ -43,13 +43,14 @@
 								placeholder="agenda in short"
 								size="large"
 								type="text"
+								v-model="agenda"
 							></Input>
 							<!-- *********** -->
 							<button
+								v-on:click="sendReq(choosedSlotId, id)"
 								class="update"
 								style="
 									background-color: #e182af;
-
 									padding: 15px 10px;
 								"
 							>
@@ -74,7 +75,7 @@ export default {
 			id: this.$route.params.id,
 			date_today: null,
 			slots: [],
-			agenda: false,
+			agenda: "",
 			choosedSlotId: null,
 		};
 	},
@@ -85,6 +86,25 @@ export default {
 		slotId(id) {
 			this.choosedSlotId = id;
 			console.log("slot id called", this.choosedSlotId);
+		},
+		async sendReq(timeSlotId, teacherId) {
+			let date = moment(this.date_today).format("DD MMM YYYY");
+			let day = moment(this.date_today).isoWeekday();
+			const data = {
+				timeSlotId,
+				date,
+				studentId: this.$store.state.authUser.id,
+				agenda: this.agenda,
+			};
+			if (this.agenda === null || this.agenda === "") {
+				return this.e("mention your agenda for meeting");
+			}
+			const req = await this.callApi(
+				"post",
+				"/appointments/request",
+				data
+			);
+			console.log(req);
 		},
 	},
 	watch: {
