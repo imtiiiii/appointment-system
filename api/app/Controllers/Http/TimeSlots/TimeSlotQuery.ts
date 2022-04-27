@@ -77,7 +77,6 @@ export default class TimeSlotQuery {
         return false;
     }
 
-    //TODO: Have some bug
     public async update(updateFor){
         try {
             const allCreatedSlots = await this.created({
@@ -106,7 +105,7 @@ export default class TimeSlotQuery {
                 let previousEndTime = moment('00:00:00','HH:mm:ss');
                 let nextStartTime = moment(allCreatedSlots[right+1].start_time,'HH:mm:ss');
 
-                if( nextStartTime.diff(newEndTime).valueOf() > 0 && previousEndTime.diff(newStartTime).valueOf() > 0){
+                if( nextStartTime.diff(previousEndTime).valueOf() > 0 && nextStartTime.diff(newEndTime).valueOf() > 0){
                     const slot = await TimeSlot.findOrFail(updateFor.slotId);
                     // console.log('It is here');
                     slot.startTime = newStartTime.format('HH:mm:ss').toString();
