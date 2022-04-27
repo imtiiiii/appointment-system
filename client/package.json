@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.11.0",
+    "moment": "^2.29.3",
     "nuxt": "^2.13.0",
     "nuxt-ctk-date-time-picker": "^2.1.1",
     "tus-js-client": "^2.3.0",

@@ -61,7 +61,7 @@ export default {
     */
     plugins: [
         '@/plugins/iview',
-        { src: '~/plugins/vue-datepicker', ssr: false }
+        { src: '~/plugins/vue-datepicker', mode: 'client' }
 
     ],
     /*
