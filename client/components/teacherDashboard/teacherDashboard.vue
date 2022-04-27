@@ -44,8 +44,8 @@
 								<Option value="2">tueday</Option>
 								<Option value="3">wednesday</Option>
 								<Option value="4">thursday</Option>
-								<Option value="5">Friday</Option>
-								<Option value="6">Satarday</Option>
+								<Option value="5">friday</Option>
+								<Option value="6">satarday</Option>
 								<Option value="7">sunday</Option>
 							</Select>
 						</div>
@@ -77,6 +77,7 @@
 				<h2>Available Slots</h2>
 			</div> -->
 			<available-slot></available-slot>
+			{{startTime}}
 		</div>
 	</div>
 </template>
