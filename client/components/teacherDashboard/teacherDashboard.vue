@@ -61,7 +61,7 @@
 								v-model="endTime"
 							></vue-timepicker>
 						</div>
-						<div class="_log_button">
+						<div class="_log_button" v-if="day && startTime && endTime">
 							<Button
 								@click="addSlot"
 								type="success"
@@ -77,7 +77,7 @@
 				<h2>Available Slots</h2>
 			</div> -->
 			<available-slot></available-slot>
-			{{startTime}}
+			<!-- {{startTime}} -->
 		</div>
 	</div>
 </template>
@@ -87,6 +87,7 @@ import VueTimepicker from "vue2-timepicker/src/vue-timepicker.vue";
 import "vue2-timepicker/dist/VueTimepicker.css";
 import createdSlot from "./createdSlots.vue";
 import availableSlots from "./availableSlots.vue";
+import moment from 'moment'
 
 export default {
 	components: {
@@ -109,16 +110,20 @@ export default {
 	methods: {
 		async addSlot() {
 			// console.log(this.day);
-			console.log(this.startTime);
-			console.log(this.endTime);
-			const addToDb = await this.callApi("post", "time-slots/add", {
-				teacher_id: this.user.id,
-				start_time: this.startTime,
-				end_time: this.endTime,
-				day_id: this.day,
-			});
-			console.log(addToDb.data.msg);
-			this.i(addToDb.data.msg);
+			const startTime = moment(this.startTime,'HH:mm');
+			const endTime = moment(this.endTime,'HH:mm');
+			if(endTime.diff(startTime).valueOf() > 0){
+				const addToDb = await this.callApi("post", "time-slots/add", {
+					teacher_id: this.user.id,
+					start_time: this.startTime,
+					end_time: this.endTime,
+					day_id: this.day,
+				});
+				console.log(addToDb.data.msg);
+				this.i(addToDb.data.msg);
+			}else{
+				this.i('Start Time and End time input in not valid')
+			}
 		},
 	},
 };
