@@ -98,16 +98,50 @@ export default class TimeSlotQuery {
                 }
             }
             // console.log('Hello World',right);
+            let newStartTime = moment(updateFor.newStartTime,'HH:mm:ss');
+            let newEndTime = moment(updateFor.newEndTime,'HH:mm:ss');
+
             if(right==0){
+                let previousEndTime = moment('00:00:00','HH:mm:ss');
+                let nextStartTime = moment(allCreatedSlots[right+1].start_time,'HH:mm:ss');
+
+                if( newStartTime.diff(previousEndTime).valueOf() > 0 && nextStartTime.diff(previousEndTime).valueOf() > 0){
+                    const slot = await TimeSlot.findOrFail(updateFor.slotId);
+                    // console.log('It is here');
+                    slot.startTime = newStartTime.format('HH:mm:ss').toString();
+                    slot.endTime = newEndTime.format('HH:mm:ss').toString();
+                    await slot.save()
+                }else{
+                    let erroObj = {
+                        messages:['New TimeStamp Conflicting with both previous or next slot']
+                    }
+                    
+                    throw erroObj;
+                }
 
             }else if(right==allCreatedSlots.length-1){
+                let nextStartTime = moment("23:59:00",'HH:mm:ss');
+                let previousEndTime = moment(allCreatedSlots[right-1].end_time,'HH:mm:ss');
+
+                if(newStartTime.diff(previousEndTime).valueOf() > 0 && nextStartTime.diff(newEndTime).valueOf() > 0){
+                    const slot = await TimeSlot.findOrFail(updateFor.slotId);
+                    // console.log('It is here');
+                    slot.startTime = newStartTime.format('HH:mm:ss').toString();
+                    slot.endTime = newEndTime.format('HH:mm:ss').toString();
+                    await slot.save()
+                }else{
+                    let erroObj = {
+                        messages:['New TimeStamp Conflicting with both previous or next slot']
+                    }
+                    
+                    throw erroObj;
+                }
 
             }else{
                 let previousSlotEndTime = moment(allCreatedSlots[right-1].end_time,'HH:mm:ss');
                 let nextSlotStartTime = moment(allCreatedSlots[right+1].start_time,'HH:mm:ss');
 
-                let newStartTime = moment(updateFor.newStartTime,'HH:mm:ss');
-                let newEndTime = moment(updateFor.newEndTime,'HH:mm:ss');
+                
                 /**
                  * newStartTime > preEndTime && nextStartTime > newEndTime
                  */
