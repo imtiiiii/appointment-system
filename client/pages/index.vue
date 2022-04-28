@@ -1,15 +1,21 @@
 <template>
-	<div>
+	<div style="margin: 100px">
 		<div v-if="user.user_type === 'admin'">
-			<h3>Admin dashboard</h3>
+			<h3 style="margin: 100px 0px; text-align: center">
+				Admin dashboard
+			</h3>
 			<admin-dashboard></admin-dashboard>
 		</div>
 		<div v-if="user.user_type === 'teacher'">
-			<!-- <h3>Teacher dashboard</h3> -->
+			<h3 style="margin: 100px 0px; text-align: center">
+				Teacher dashboard
+			</h3>
 			<teacher-dashboard></teacher-dashboard>
 		</div>
 		<div v-if="user.user_type === 'student'">
-			<h3>Student dashboard</h3>
+			<h3 style="margin: 100px 0px; text-align: center">
+				Student dashboard
+			</h3>
 			<student-dashboard></student-dashboard>
 		</div>
 	</div>

@@ -1,8 +1,6 @@
 <template>
 	<div>
-		<div>
-			<h3>Welcome to student's dashboard</h3>
-		</div>
+		<div></div>
 		<!-- ALL BUTTONS -->
 		<div>
 			<button

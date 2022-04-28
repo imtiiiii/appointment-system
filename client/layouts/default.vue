@@ -1,6 +1,6 @@
  <template>
 	<div id="app" style="margin-bottom: 200px; padding-bottom: 100px">
-		<div id="main-wrapper" style="padding-top: 100px">
+		<div id="main-wrapper">
 			<!-- Menu -->
 			<div
 				class="_menu"
@@ -58,7 +58,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 						<div class="_layout_auto">
 							<div class="_menu_right">
 								<a
@@ -68,7 +68,7 @@
 									>Dashboard</a
 								>
 							</div>
-							<br>
+							<br />
 							<div class="_menu_right">
 								<a
 									@click="logout"
@@ -147,9 +147,9 @@ export default {
 
 			return (this.tab = tab);
 		},
-		jumpToDashBoard(){
-			this.$router.push('/');
-		}
+		jumpToDashBoard() {
+			this.$router.push("/");
+		},
 	},
 
 	created() {},

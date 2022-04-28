@@ -1,5 +1,5 @@
 <template>
-	<div style="margin-top: 90px">
+	<div>
 		<!-- Form -->
 		<div class="_log_form_main">
 			<h2 class="_log_form_title">Sign Up</h2>
@@ -59,7 +59,7 @@
 					>
 						<Option value="teacher">teacher</Option>
 						<Option value="student">student</Option>
-						<Option v-if="form.email" value="admin">admin</Option>
+						<Option v-if="user" value="admin">admin</Option>
 					</Select>
 				</div>
 				<!-- **********STUDENT ID ************ -->
@@ -83,40 +83,7 @@
 						v-model="form.dept"
 					></Input>
 				</div>
-				<!-- ******** COURSE ************** -->
-				<!-- <div
-					class="_log_input_group"
-					v-if="form.user_type === 'teacher'"
-				>
-					<Input
-						placeholder="COURSE"
-						size="large"
-						type="text"
-						v-model="form.course"
-					></Input>
-				</div> -->
 
-				<!-- ********* GENDER SELECT *********** -->
-				<!-- 
-                    <div class="_log_input_group">
-					    <Select
-						    placeholder="Please select your gender"
-						    size="large"
-						    v-model="form.gender"
-					>
-						<Option value="Female">Female</Option>
-						<Option value="Male">Male</Option>
-						<Option value="Other">Other</Option>
-					</Select>
-				</div>
-                 -->
-				<!-- ******** TERMS AND CONDITION ******** -->
-				<!-- <div class="_log_input_group">
-					<Checkbox v-model="form.agree" size="small" border>
-						I agree with the <a href="">Terms</a> &
-						<a href="">Privacy</a></Checkbox
-					>
-				</div> -->
 				<div class="_log_button">
 					<Button
 						@click.native="register"
@@ -138,6 +105,7 @@
 export default {
 	data() {
 		return {
+			user: null,
 			form: {
 				firstName: "",
 				lastName: "",
@@ -214,6 +182,9 @@ export default {
 				dept: null,
 			};
 		},
+	},
+	created() {
+		this.user = this.$store.state.authUser;
 	},
 };
 </script>
