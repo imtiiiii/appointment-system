@@ -35,6 +35,20 @@ export default class AppointmentsController {
 
         return req;
     }
+    async appointments(ctx: HttpContextContract) {
+        const data = ctx.request.all();
+        const currdate = moment();
+        // console.log("curr date= ", currdate.toString())
+        let appointment = new Array()
+        // console.log(data);
+        if (data.type === 'history') {
+            appointment = await Appointment.query().where("date", "<", currdate.toString()).andWhere("studentId", data.id).andWhere("status", "1").preload("forWhichTimeSlot", (slotQuery) => {
+
+                slotQuery.preload("user")
+            });
+            return appointment
+        }
+    }
     public async upCommingAppoinments(ctx: HttpContextContract) {
         return await this.appoinmentService.upCommingAppoinments(ctx);
     }
@@ -46,15 +60,15 @@ export default class AppointmentsController {
             "appointmentId":"lll"
         }
      */
-    public async status(ctx:HttpContextContract){
+    public async status(ctx: HttpContextContract) {
         try {
             await this.appoinmentValidator.status(ctx);
         } catch (error) {
             const errorObj = JSON.parse(error);
             return ctx.response.status(422).send({
-                status:'BAD',
-                message:errorObj,
-                result:[]
+                status: 'BAD',
+                message: errorObj,
+                result: []
             });
         }
         return await this.appoinmentService.status(ctx);
