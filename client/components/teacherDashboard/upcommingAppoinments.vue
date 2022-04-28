@@ -22,8 +22,10 @@
                         <th>{{item.byWhichStudent.course}}</th>
                         <th>{{item.agenda}}</th>
                         <th>
-                            <button v-on:click="acceptAppointment(item.id,index)">Accept</button>
-                            <button v-on:click="rejectAppointment(item.id,index)">Reject</button>
+                            <!-- acceptAppointment(item.id,index,1) here 1 means enum value of status accept -->
+                            <button v-on:click="changeStatus(item.id,index,'1')">Accept</button>
+                            <!-- acceptAppointment(item.id,index,1) here 2 means enum value of status rejection -->
+                            <button v-on:click="changeStatus(item.id,index,'2')">Reject</button>
                         </th>
                     </tr>
                 </table>
@@ -47,7 +49,18 @@ export default {
 
     },
     methods:{
-        async acceptAppointment(itemId,index){
+        async changeStatus(itemId,index,status){
+            try {
+                const data = await this.callApi('put','/appointments/status',{
+                    appointmentId:itemId,
+                    status:status,
+                })
+                this.upCommingAppoinments.splice(index,1);
+                const messageBody = status='1'?'Appointment Accepted':'Appointment Rejected';
+                this.i(messageBody)
+            } catch (error) {
+                this.swr();
+            }
             
         }
     }
