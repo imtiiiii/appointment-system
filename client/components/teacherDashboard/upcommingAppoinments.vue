@@ -56,7 +56,7 @@ export default {
                     status:status,
                 })
                 this.upCommingAppoinments.splice(index,1);
-                const messageBody = status='1'?'Appointment Accepted':'Appointment Rejected';
+                const messageBody = (status=='1'?'Appointment Accepted':'Appointment Rejected');
                 this.i(messageBody)
             } catch (error) {
                 this.swr();
