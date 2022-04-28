@@ -38,4 +38,20 @@ export default class AppointmentsController {
     public async upCommingAppoinments(ctx: HttpContextContract) {
         return await this.appoinmentService.upCommingAppoinments(ctx);
     }
+    /**
+     * Status Controller
+     */
+    public async status(ctx:HttpContextContract){
+        try {
+            await this.appoinmentValidator.status(ctx);
+        } catch (error) {
+            const errorObj = JSON.parse(error);
+            return ctx.response.status(422).send({
+                status:'BAD',
+                message:errorObj,
+                result:[]
+            });
+        }
+        return await this.appoinmentService.status(ctx);
+    }
 }

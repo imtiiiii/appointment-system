@@ -22,8 +22,8 @@
                         <th>{{item.byWhichStudent.course}}</th>
                         <th>{{item.agenda}}</th>
                         <th>
-                            <button>Accept</button>
-                            <button>Reject</button>
+                            <button v-on:click="acceptAppointment(item.id,index)">Accept</button>
+                            <button v-on:click="rejectAppointment(item.id,index)">Reject</button>
                         </th>
                     </tr>
                 </table>
@@ -45,6 +45,11 @@ export default {
         const {data} = await this.callApi('get','/appointments/upCommingAppoinments');
         this.upCommingAppoinments = data;
 
+    },
+    methods:{
+        async acceptAppointment(itemId,index){
+            
+        }
     }
 }
 </script>
