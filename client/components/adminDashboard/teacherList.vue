@@ -42,6 +42,7 @@
 				</div>
 				<div v-else>
 					<button
+						v-on:click="timeSlot(teacher.id)"
 						class="update"
 						style="
 							background-color: #42cc8c;
@@ -82,6 +83,9 @@ export default {
 		},
 		update(id) {
 			this.$router.push(`/profile/${id}`);
+		},
+		timeSlot(id) {
+			this.$router.push(`/time-slots/${id}`);
 		},
 	},
 };
