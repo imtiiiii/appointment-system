@@ -58,8 +58,17 @@
 								</div>
 							</div>
 						</div>
-
+						
 						<div class="_layout_auto">
+							<div class="_menu_right">
+								<a
+									@click="jumpToDashBoard()"
+									href="javascript:void(0)"
+									class="text-white"
+									>Dashboard</a
+								>
+							</div>
+							<br>
 							<div class="_menu_right">
 								<a
 									@click="logout"
@@ -138,6 +147,9 @@ export default {
 
 			return (this.tab = tab);
 		},
+		jumpToDashBoard(){
+			this.$router.push('/');
+		}
 	},
 
 	created() {},
