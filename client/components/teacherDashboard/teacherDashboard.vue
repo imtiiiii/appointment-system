@@ -2,13 +2,14 @@
 	<div>
 		<div>
 			<button
-				style="marging: 30px 20px"
+				style="marging: 50px 20px"
 				class="_log_btn _2menu_long"
 				type="button"
+				v-on:click="chooseOption()"
 			>
-				Manage Your Meeting Slots
+			{{options === 'appoinment'?'Appoinment Request':'Create Slot'}}
 			</button>
-			<button
+			<!-- <button
 				style="marging: 30px 20px"
 				class="_log_btn _2menu_long"
 				type="button"
@@ -21,9 +22,9 @@
 				type="button"
 			>
 				Add time slots
-			</button>
+			</button> -->
 		</div>
-		<div style="display: flex">
+		<div style="display: flex" v-if=" options === 'index' ">
 			<created-slot></created-slot>
 			<div style="margin: 165px 50px; width: 100%; height: 100%">
 				<!-- <client-only>
@@ -79,6 +80,10 @@
 			<available-slot></available-slot>
 			<!-- {{startTime}} -->
 		</div>
+		<div style="display: flex" v-if=" options === 'appoinment'">
+			<h3>Appoinment Request Section</h3>
+			<uppcomming-appoinments/>
+		</div>
 	</div>
 </template>
 
@@ -87,6 +92,7 @@ import VueTimepicker from "vue2-timepicker/src/vue-timepicker.vue";
 import "vue2-timepicker/dist/VueTimepicker.css";
 import createdSlot from "./createdSlots.vue";
 import availableSlots from "./availableSlots.vue";
+import upcommingAppoinments from './upcommingAppoinments.vue'
 import moment from 'moment'
 
 export default {
@@ -94,6 +100,7 @@ export default {
 		"vue-timepicker": VueTimepicker,
 		"created-slot": createdSlot,
 		"available-slot": availableSlots,
+		'uppcomming-appoinments': upcommingAppoinments
 	},
 	data() {
 		return {
@@ -101,6 +108,7 @@ export default {
 			startTime: "",
 			endTime: "",
 			user: null,
+			options:'index', // possible variable appoinment,index
 		};
 	},
 	created() {
@@ -125,6 +133,13 @@ export default {
 				this.i('Start Time and End time input in not valid')
 			}
 		},
+		chooseOption(value){
+			if(this.options === 'index'){
+				this.options = 'appoinment'
+			}else{
+				this.options = 'index';
+			}
+		}
 	},
 };
 </script>
