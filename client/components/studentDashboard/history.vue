@@ -26,7 +26,13 @@ export default {
 		async history() {
 			console.log("history called", this.currentDate);
 
-			const res = await this.callApi("get");
+			const res = await this.callApi(
+				"get",
+				`/appointments?id=${
+					this.$store.state.authUser.id
+				}&type=${"history"}`
+			);
+			console.log(res);
 		},
 	},
 };
