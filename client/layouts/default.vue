@@ -60,7 +60,16 @@
 						</div>
 						
 						<div class="_layout_auto">
-							<div class="_menu_right">
+							<div class="_menu_right" v-if="this.$store.state.authUser">
+								<a
+									@click="jumpToDashProfile()"
+									href="javascript:void(0)"
+									class="text-white"
+									>Profile</a
+								>
+							</div>
+							<br>
+							<div class="_menu_right" v-if="this.$store.state.authUser">
 								<a
 									@click="jumpToDashBoard()"
 									href="javascript:void(0)"
@@ -149,9 +158,17 @@ export default {
 		},
 		jumpToDashBoard(){
 			this.$router.push('/');
+		},
+		jumpToDashProfile(){
+			this.$router.push('/profile')
 		}
 	},
 
 	created() {},
 };
 </script>
+<style>
+	._menu_right{
+		height: 15px;
+	}
+</style>
