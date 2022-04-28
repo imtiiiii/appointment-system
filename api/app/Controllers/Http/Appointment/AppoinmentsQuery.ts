@@ -14,4 +14,12 @@ export default class AppoinmentQuery{
         const appoinmentsJSON = appoinments.map((appoinments)=> appoinments.serialize()) 
         return appoinmentsJSON;
     }
+
+    public async status(changeStatusFor){
+        let appointment = await Appointment.findOrFail(changeStatusFor.appointmentId);
+        appointment.status = changeStatusFor.status;
+
+        await appointment.save();
+        
+    }
 }

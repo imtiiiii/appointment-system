@@ -40,6 +40,11 @@ export default class AppointmentsController {
     }
     /**
      * Status Controller
+     * Ex Put Body: 
+     *  
+     * {
+            "appointmentId":"lll"
+        }
      */
     public async status(ctx:HttpContextContract){
         try {

@@ -12,4 +12,13 @@ export default class AppoinmentService {
         }
         return this.appoinmentQuery.upCommingAppoinments(upCommingAppoinmentsFor);
     }
+
+    public async status(ctx){
+        const { appointmentId, status } = ctx.request.only(['appointmentId','status']);
+        const changeStatusFor = {
+            appointmentId,
+            status,
+        }
+        return await this.appoinmentQuery.status(changeStatusFor);
+    }
 }
