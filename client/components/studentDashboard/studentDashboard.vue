@@ -40,13 +40,19 @@
 		<div v-if="showTeacherList">
 			<teacher-list></teacher-list>
 		</div>
+		<div v-if="showHistory">
+			<history></history>
+		</div>
 	</div>
 </template>
 
 <script>
 import teacherList from "../adminDashboard/teacherList.vue";
+import History from "./history.vue";
+import moment from "moment";
+moment().format();
 export default {
-	components: { teacherList },
+	components: { teacherList, History },
 	data() {
 		return {
 			showTeacherList: false,

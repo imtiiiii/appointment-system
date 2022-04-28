@@ -1,6 +1,6 @@
  <template>
-	<div id="app" style="margin-bottom: 100px 0">
-		<div id="main-wrapper">
+	<div id="app" style="margin-bottom: 200px; padding-bottom: 100px">
+		<div id="main-wrapper" style="padding-top: 100px">
 			<!-- Menu -->
 			<div
 				class="_menu"
