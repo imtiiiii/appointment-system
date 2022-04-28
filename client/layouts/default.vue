@@ -1,5 +1,5 @@
  <template>
-	<div id="app" style="margin: 100px 0">
+	<div id="app" style="margin-bottom: 100px 0">
 		<div id="main-wrapper">
 			<!-- Menu -->
 			<div
@@ -19,7 +19,7 @@
 									<NuxtLink to="/">
 										<h3 class="_menu_logo_text">
 											<span class="_menu_logo_symbol"
-												>C</span
+												>A</span
 											>
 											<span class="_menu_logo_text_main"
 												>APPOINTMENT SYSTEM</span
