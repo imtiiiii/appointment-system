@@ -21,7 +21,17 @@ export default class ProfileController {
         console.log(userInfo);
         return ctx.response.send(userInfo);
     }
-
+    /** 
+     *  updateProfile
+     *  Example Payload Body:
+     * {
+            "firstName":"ak",
+            "lastName":"kmk",
+            "dept":"Bio",
+            "course":"xxx",
+            "studentId":123
+        }
+     */
     async updateProfile(ctx: HttpContextContract){
         try{
             await this.profileValidator.profileUpdateValidator(ctx);

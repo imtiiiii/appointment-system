@@ -10,7 +10,7 @@
 						placeholder="First Name"
 						size="large"
 						type="text"
-						v-model="userInfo.first_name"
+						v-model="userInfo.firstName"
 					></Input>
 				</div>
 				<div class="_log_input_group">
@@ -19,10 +19,11 @@
 						placeholder="Last Name"
 						size="large"
 						type="text"
-						v-model="userInfo.last_name"
+						v-model="userInfo.lastName"
 					></Input>
 				</div>
-				<div class="_log_input_group">
+				<!-- User Can not change him/her email address  -->
+				<!-- <div class="_log_input_group">
 					<Label>Email:</Label>
 					<Input
 						v-model="userInfo.email"
@@ -30,12 +31,12 @@
 						size="large"
 						type="text"
 					></Input>
-				</div>
+				</div> -->
 				<div
 					class="_log_input_group"
 					v-if="
-						userInfo.user_type === 'teacher' ||
-						userInfo.user_type === 'student'
+						$store.state.authUser.user_type === 'teacher' ||
+						$store.state.authUser.user_type === 'student'
 					"
 				>
 					<Label>Depertment:</Label>
@@ -48,7 +49,7 @@
 				</div>
 				<div
 					class="_log_input_group"
-					v-if="userInfo.user_type === 'teacher'"
+					v-if="$store.state.authUser.user_type === 'teacher'"
 				>
 					<Label>Course Name:</Label>
 					<Input
@@ -60,11 +61,11 @@
 				</div>
 				<div
 					class="_log_input_group"
-					v-if="userInfo.user_type === 'student'"
+					v-if="$store.state.authUser.user_type === 'student'"
 				>
 					<Label>Student ID:</Label>
 					<Input
-						v-model="userInfo.student_id"
+						v-model="userInfo.studentId"
 						placeholder="Student ID"
 						size="large"
 						type="text"
@@ -103,18 +104,25 @@ export default {
 	data() {
 		return {
 			// userInfo:this.$store.state.authUser,
-			userInfo: {},
+			// userInfo: {},
+			userInfo:{
+                firstName : this.$store.state.authUser.first_name,
+                lastName : this.$store.state.authUser.last_name,
+                dept: this.$store.state.authUser.dept,
+                course: this.$store.state.authUser.course,
+                studentId: this.$store.state.authUser.student_id,
+            }
 		};
 	},
-	async created() {
-		// console.log("edit profile props=", this.userId);
-		const user = await this.callApi("get", `profile/${this.userId}`);
-		// console.log("user=", user);
-		if (user.status === 200) {
-			this.userInfo = user.data;
-			console.log("user info ", this.userInfo);
-		}
-	},
+	// async created() {
+	// 	// console.log("edit profile props=", this.userId);
+	// 	const user = await this.callApi("get", `profile/${this.userId}`);
+	// 	// console.log("user=", user);
+	// 	if (user.status === 200) {
+	// 		this.userInfo = user.data;
+	// 		console.log("user info ", this.userInfo);
+	// 	}
+	// },
 	methods: {
 		async updateUser() {
 			try {
