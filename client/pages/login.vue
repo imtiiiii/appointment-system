@@ -60,8 +60,8 @@ export default {
     data(){
        return{
           form : {
-              uid : 'testuser2@gmail.com',
-              password : 'testuser',
+              uid : '',
+              password : '',
 
           },
           isLoading : false
