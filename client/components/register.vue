@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<!-- Form -->
-		<div class="_log_form_main">
+		<div class="_log_form_main" style="margin-top: 150px">
 			<h2 class="_log_form_title">Sign Up</h2>
 
 			<div class="_log_form">
