@@ -83,7 +83,6 @@
 		
 		<!-- If app user click appoinment request -->
 		<div style="display: flex" v-if=" options === 'appoinment'">
-			<h3>Appoinment Request Section</h3>
 			<uppcomming-appoinments/>
 		</div>
 	</div>

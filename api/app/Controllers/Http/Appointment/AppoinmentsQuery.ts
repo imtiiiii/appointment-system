@@ -8,8 +8,9 @@ export default class AppoinmentQuery{
          */
         const cuurentDate = moment().toString();
         let appoinments = await Appointment.query().select('*').preload('forWhichTimeSlot',(timeSlotQuery)=>{
-            timeSlotQuery.where('teacherId',upCommingAppoinmentsFor.teacherId)
-        }).where('date','>=',cuurentDate).where('status','0').orWhere('status','2').orderBy('date','desc');
+            timeSlotQuery.where('teacherId',upCommingAppoinmentsFor.teacherId).preload('day');
+        }).preload('byWhichStudent').where('date','>=',cuurentDate).where('status','0').orWhere('status','2').orderBy('date','desc');
+        // let appoinments = await Appointment.query().select('*').preload('byWhichStudent');
         const appoinmentsJSON = appoinments.map((appoinments)=> appoinments.serialize()) 
         return appoinmentsJSON;
     }

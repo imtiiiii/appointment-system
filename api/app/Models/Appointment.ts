@@ -38,7 +38,7 @@ export default class Appointment extends BaseModel {
      * Database Relationships
      */
     @belongsTo(() => User, {
-        localKey: 'id'
+        foreignKey: 'id'
     })
     public byWhichStudent: BelongsTo<typeof User>
 
@@ -48,9 +48,6 @@ export default class Appointment extends BaseModel {
     })
     public forWhichTimeSlot: BelongsTo<typeof TimeSlot>
 
-    public static notLessThanCurrentDate = scope((query,cuurentDate) => {
-        console.log(cuurentDate);
-        query.where('date', '=',cuurentDate)
-      })
+   
 
 }
