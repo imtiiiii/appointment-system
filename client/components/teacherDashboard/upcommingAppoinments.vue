@@ -16,16 +16,16 @@
                     <tr v-for="(item,index) in upCommingAppoinments" :key="index">
                         <th>{{item.date}}</th>
                         <th>{{item.forWhichTimeSlot.day.day_name}}</th>
-                        <th>{{item.byWhichStudent.user_name}}</th>
+                        <th><button id="link" v-on:click="jumpToProfile(item.byWhichStudent.id)">{{item.byWhichStudent.user_name}}</button> </th>
                         <th>{{item.byWhichStudent.email}}</th>
                         <th>{{item.byWhichStudent.dept}}</th>
                         <th>{{item.byWhichStudent.course}}</th>
                         <th>{{item.agenda}}</th>
                         <th>
                             <!-- acceptAppointment(item.id,index,1) here 1 means enum value of status accept -->
-                            <button v-on:click="changeStatus(item.id,index,'1')">Accept</button>
+                            <Button v-on:click="changeStatus(item.id,index,'1')">Accept</Button>
                             <!-- acceptAppointment(item.id,index,1) here 2 means enum value of status rejection -->
-                            <button v-on:click="changeStatus(item.id,index,'2')">Reject</button>
+                            <Button v-on:click="changeStatus(item.id,index,'2')">Reject</Button>
                         </th>
                     </tr>
                 </table>
@@ -62,6 +62,9 @@ export default {
                 this.swr();
             }
             
+        },
+        jumpToProfile(profileId){
+            this.$router.push(`profile/${profileId}`)
         }
     }
 }
@@ -69,18 +72,29 @@ export default {
 
 <style>
     table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
     }
 
     td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
     }
 
     tr:nth-child(even) {
-    background-color: #dddddd;
+        background-color: #dddddd;
+    }
+    button#link {
+        background: none!important;
+        border: none;
+        padding: 0!important;
+        /*optional*/
+        font-family: arial, sans-serif;
+        /*input has OS specific font-family*/
+        color: #069;
+        text-decoration: underline;
+        cursor: pointer;
     }
 </style>
