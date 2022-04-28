@@ -37,17 +37,14 @@ export default class AppointmentsController {
     }
     async appointments(ctx: HttpContextContract) {
         const data = ctx.request.all();
+        console.log(data)
         const currdate = moment();
-        // console.log("curr date= ", currdate.toString())
-        let appointment = new Array()
-        // console.log(data);
-        if (data.type === 'history') {
-            appointment = await Appointment.query().where("date", "<", currdate.toString()).andWhere("studentId", data.id).andWhere("status", "1").preload("forWhichTimeSlot", (slotQuery) => {
 
-                slotQuery.preload("user")
-            });
-            return appointment
-        }
+        const appointment = await Appointment.query().where("studentId", data.id).andWhere("status", "1").preload("forWhichTimeSlot", (slotQuery) => {
+
+            slotQuery.preload("user")
+        });
+        return appointment
     }
     public async upCommingAppoinments(ctx: HttpContextContract) {
         return await this.appoinmentService.upCommingAppoinments(ctx);

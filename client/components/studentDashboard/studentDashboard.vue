@@ -41,23 +41,28 @@
 			<teacher-list></teacher-list>
 		</div>
 		<div v-if="showHistory">
-			<history></history>
+			<students-appointment v-bind:type="type"></students-appointment>
+		</div>
+		<div v-if="showUpcomingMeeting">
+			<students-appointment v-bind:type="type"></students-appointment>
 		</div>
 	</div>
 </template>
 
 <script>
 import teacherList from "../adminDashboard/teacherList.vue";
-import History from "./history.vue";
+
 import moment from "moment";
+import StudentsAppointment from "./studentsAppointment.vue";
 moment().format();
 export default {
-	components: { teacherList, History },
+	components: { teacherList, StudentsAppointment },
 	data() {
 		return {
 			showTeacherList: false,
 			showHistory: false,
 			showUpcomingMeeting: false,
+			type: "",
 		};
 	},
 	methods: {
@@ -71,11 +76,13 @@ export default {
 			this.showHistory = !this.showHistory;
 			this.showUpcomingMeeting = false;
 			this.showTeacherList = false;
+			this.type = "history";
 		},
 		seeUpcomingMeeting() {
 			this.showUpcomingMeeting = !this.showUpcomingMeeting;
 			this.showTeacherList = false;
 			this.showHistory = false;
+			this.type = "upcoming";
 		},
 	},
 };
