@@ -88,7 +88,7 @@ export default {
 			console.log("slot id called", this.choosedSlotId);
 		},
 		async sendReq(timeSlotId, teacherId) {
-			let date = moment(this.date_today).format("DD MMM YYYY");
+			let date = moment(this.date_today).toString();
 			let day = moment(this.date_today).isoWeekday();
 			const data = {
 				timeSlotId,
