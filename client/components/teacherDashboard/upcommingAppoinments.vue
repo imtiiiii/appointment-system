@@ -11,6 +11,10 @@ export default {
         return {
             
         }
+    },
+    async created(){
+        const {data} = await this.callApi('get','/appointments/upCommingAppoinments');
+        console.log(data);
     }
 }
 </script>

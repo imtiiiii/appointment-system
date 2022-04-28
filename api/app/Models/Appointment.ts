@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column,scope } from '@ioc:Adonis/Lucid/Orm'
 import User from './User'
 import TimeSlot from './TimeSlot'
+import moment from 'moment'
 
 export default class Appointment extends BaseModel {
     @column({ isPrimary: true })
@@ -47,5 +48,9 @@ export default class Appointment extends BaseModel {
     })
     public forWhichTimeSlot: BelongsTo<typeof TimeSlot>
 
+    public static notLessThanCurrentDate = scope((query,cuurentDate) => {
+        console.log(cuurentDate);
+        query.where('date', '=',cuurentDate)
+      })
 
 }
