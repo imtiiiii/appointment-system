@@ -72,11 +72,6 @@ export default {
     timeSlot(id) {
       this.$router.push(`/time-slots/${id}`);
     },
-    async erase(id) {
-      const dlt = await this.callApi("delete", "/auth/delete", {
-        id,
-      });
-    },
   },
 };
 </script>
