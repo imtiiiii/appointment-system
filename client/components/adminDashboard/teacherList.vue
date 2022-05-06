@@ -1,5 +1,18 @@
 <template>
   <div>
+    <div class="_layout_col _only_desktop" style="margin: 50px 0px">
+      <div class="_menu_search">
+        <div class="_menu_search_main">
+          <div class="_menu_search_icon">
+            <i class="fas fa-search"></i>
+          </div>
+
+          <div class="_menu_search_input">
+            <input type="text" placeholder="Search" v-model="searchInput" />
+          </div>
+        </div>
+      </div>
+    </div>
     <div
       v-for="(teacher, index) of teachers"
       :key="index"
@@ -50,16 +63,13 @@ export default {
     return {
       teachers: null,
       user: null,
+      searchInput: "",
     };
   },
   async created() {
     this.user = this.$store.state.authUser;
-    const teachers = await this.callApi("get", "/dashboard/teacher-list/");
-    if (teachers.status === 200) {
-      this.teachers = teachers.data;
-      console.log(this.teachers);
-    }
   },
+
   methods: {
     async erase(id) {
       const dlt = await this.callApi("delete", "/auth/delete", {
@@ -71,6 +81,22 @@ export default {
     },
     timeSlot(id) {
       this.$router.push(`/time-slots/${id}`);
+    },
+  },
+  watch: {
+    async searching() {},
+  },
+  computed: {
+    searching: async function () {
+      console.log("searching for something", this.searchInput);
+      if (this.searchInput === "") {
+        const teachers = await this.callApi("get", "/dashboard/teacher-list/");
+        if (teachers.status === 200) {
+          this.teachers = teachers.data;
+          console.log(this.teachers);
+        }
+      } else {
+      }
     },
   },
 };
