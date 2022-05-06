@@ -1,6 +1,10 @@
 <template>
   <div>
-    <div class="_layout_col _only_desktop" style="margin: 50px 0px">
+    <div
+      v-if="user.user_type === 'student'"
+      class="_layout_col _only_desktop"
+      style="margin: 50px 0px"
+    >
       <div class="_menu_search">
         <div class="_menu_search_main">
           <div class="_menu_search_icon">
@@ -24,6 +28,8 @@
         <h4>Email:{{ teacher.email }}</h4>
         <hr />
         <h4>Identity:{{ teacher.user_type }}</h4>
+        <hr />
+        <h4>Depertment:{{ teacher.dept }}</h4>
         <hr />
         <div v-if="user.user_type === 'admin'">
           <div style="margin: 30px 0px">
@@ -96,6 +102,13 @@ export default {
           console.log(this.teachers);
         }
       } else {
+        this.teachers = null;
+        const teachers = await this.callApi(
+          "get",
+          `/dashboard/teacher-list/search?value=${this.searchInput}`
+        );
+        this.teachers = teachers.data;
+        console.log("im from search", teachers.data);
       }
     },
   },

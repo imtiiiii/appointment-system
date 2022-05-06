@@ -6,4 +6,5 @@ Route.group(() => {
     Route.put("/update/status", "Dashboard/DashboarAdminsController.updateStatus")
     Route.get("/student-list/", "Dashboard/DashboarAdminsController.studentList")
     Route.get("/teacher-list/", "Dashboard/DashboarAdminsController.teacherList")
+    Route.get("/teacher-list/search", "Dashboard/DashboarAdminsController.searchTeacher")
 }).prefix("dashboard")

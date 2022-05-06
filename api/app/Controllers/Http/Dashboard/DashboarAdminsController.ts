@@ -36,4 +36,15 @@ export default class DashboarAdminsController {
         return users;
 
     }
+    public async searchTeacher(ctx: HttpContextContract) {
+        const value = ctx.request.qs().value;
+        // console.log("value", value)
+        const teachers = await User.query().where((query) => {
+            query.where("user_type", "teacher").where(search => {
+                search.where("first_name", "like", `%${value}%`).orWhere("last_name", "like", `%${value}%`)
+                    .orWhere("dept", "like", `%${value}%`)
+            })
+        })
+        return teachers
+    }
 }
