@@ -4,7 +4,7 @@
 			background-color: #9cb0ba;
 			margin: 10px 20px;
 			padding: 20px 10px;
-			height: 400vh;
+			height: 200vh;
 		"
 	>
 		<div>
@@ -42,12 +42,15 @@
 							padding: 15px 0px;
 						"
 					>
-						{{ slot.start_time }}-{{ slot.end_time }}
+						{{ slot.start_time }} - {{ slot.end_time }}
 					</button>
-					<div v-if="choosedSlotId === slot.id">
+					<div
+						style="margin: 20px 0px"
+						v-if="choosedSlotId === slot.id"
+					>
 						<div class="_log_input_group">
 							<Input
-								placeholder="agenda in short"
+								placeholder="Agenda in short"
 								size="large"
 								type="text"
 								v-model="agenda"
@@ -58,7 +61,8 @@
 								class="update"
 								style="
 									background-color: #e182af;
-									padding: 15px 10px;
+									padding: 10px 05px;
+									margin-top: 5px;
 								"
 							>
 								send request
@@ -118,6 +122,7 @@ export default {
 			if (req.status === 200) {
 				this.s("request sent ");
 				this.agenda = "";
+				this.choosedSlotId = -1;
 			} else {
 				this.e("something went wrong, try again");
 			}
