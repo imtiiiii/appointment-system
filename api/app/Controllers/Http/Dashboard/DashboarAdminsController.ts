@@ -32,7 +32,7 @@ export default class DashboarAdminsController {
     }
     // get all teachers list
     public async teacherList(ctx: HttpContextContract) {
-        const users = await User.query().where("user_type", "teacher");
+        const users = await User.query().where("user_type", "teacher").andWhere("status", "1")
         return users;
 
     }
