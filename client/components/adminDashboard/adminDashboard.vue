@@ -1,12 +1,6 @@
 <template>
 	<div>
-		<div
-			style="
-				display: flex;
-				justify-content: space-between;
-				border-bottom: 2px solid black;
-			"
-		>
+		<div class="dasboard-menu">
 			<button
 				style="marging: 30px 20px"
 				class="_log_btn _2menu_long"
@@ -105,4 +99,9 @@ export default {
 </script>
 
 <style>
+.dashboard-menu {
+	display: grid;
+	grid-template: 150px / auto auto auto auto;
+	column-gap: 50px;
+}
 </style>

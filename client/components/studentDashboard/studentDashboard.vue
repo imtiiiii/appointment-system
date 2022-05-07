@@ -2,7 +2,7 @@
 	<div>
 		<div></div>
 		<!-- ALL BUTTONS -->
-		<div>
+		<div class="dashboard-menu">
 			<button
 				style="marging: 30px 20px"
 				class="_log_btn _2menu_long"
@@ -27,13 +27,6 @@
 			>
 				Teacher list
 			</button>
-			<!-- <button
-				style="marging: 30px 20px"
-				class="_log_btn _2menu_long"
-				type="button"
-			>
-				Search
-			</button> -->
 		</div>
 		<div v-if="showTeacherList">
 			<teacher-list></teacher-list>
@@ -87,4 +80,9 @@ export default {
 </script>
 
 <style>
+.dashboard-menu {
+	display: grid;
+	grid-template: 150px / auto auto auto auto;
+	column-gap: 50px;
+}
 </style>
