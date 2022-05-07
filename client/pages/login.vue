@@ -71,9 +71,9 @@
           >
         </div>
 
-        <p class="_log_forget">
+        <!-- <p class="_log_forget">
           <nuxt-link to="/forgot_password">Forgot password?</nuxt-link>
-        </p>
+        </p> -->
       </div>
     </div>
     <!-- Form -->
@@ -97,31 +97,47 @@ export default {
       let isAnyFieldEmpty = false;
       let emptyFieldName = "";
       Object.keys(this.form).forEach((value) => {
-        if (value === false) {
+        if (this.form[value] === '') {
           isAnyFieldEmpty = true;
           emptyFieldName = value;
+          if(value === 'uid'){
+            emptyFieldName = 'Email or Username'
+          }
         }
       });
       if (isAnyFieldEmpty === true) {
         this.w(`${emptyFieldName} field is empty`);
       } else {
-        try {
-          const { data: loginInfo } = await this.callApi(
+        const { data: loginInfo } = await this.callApi(
             "post",
             "/auth/login",
             this.form
           );
-          if (loginInfo.status === "PENDING") {
-            this.i("You are not approved by Admin yet");
-          } else {
-            this.s("LoggedIn Successfully!");
-            const authUserData = loginInfo.result[0];
-            this.$store.state.authUser = authUserData;
-            this.$router.push("/");
-          }
-        } catch (error) {
-          this.swr();
+        if(loginInfo.status === 'OK'){
+          const authUserData = loginInfo.result[0];
+          this.$store.state.authUser = authUserData;
+          this.$router.push("/");
         }
+        // try {
+        //   const { data: loginInfo } = await this.callApi(
+        //     "post",
+        //     "/auth/login",
+        //     this.form
+        //   );
+        //   if (loginInfo.status === "PENDING") {
+        //     this.i("You are not approved by Admin yet");
+        //   }else if(loginInfo.status === "BAD"){
+        //     this.i(loginInfo.message);
+        //   } else {
+        //     this.s("LoggedIn Successfully!");
+        //     const authUserData = loginInfo.result[0];
+        //     this.$store.state.authUser = authUserData;
+        //     this.$router.push("/");
+        //   }
+        // } catch (error) {
+        //   console.log('Hello ')
+        //   this.swr();
+        // }
       }
       //   if(this.form.email == '') return this.i("Email is requied")
       //   if(this.form.password == '') return this.i("Password is requied")

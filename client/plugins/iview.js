@@ -66,9 +66,10 @@ Vue.mixin({
         } catch (e) {
           let res = e.response
           if (res.status == 403) {
-            window.location = '/login'
+            window.location = '/login';
+            
           } else if (res.status == 422 || res.status == 400) {
-            this.validationError(res)
+            this.validationError(res.data)
   
           } else if (res.status == 404 || res.status == 401) {
             if(res.data.message) this.i(res.data.message)
@@ -85,7 +86,8 @@ Vue.mixin({
         }
       },
       validationError(res) {
-        for (let e of res.data.errors) {
+        // console.log('res:',res.message);
+        for (let e of res.message) {
           this.i(e.message)
         }
       },

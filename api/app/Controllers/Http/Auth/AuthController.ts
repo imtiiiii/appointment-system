@@ -63,7 +63,7 @@ export default class AuthController {
         // await this.authValidator.validateLoginSchema(ctx)
         let data = ctx.request.all();
         try {
-            const userStatus: String = await this.authService.userStatus(data.uid);
+            const userStatus: string = await this.authService.userStatus(data.uid);
             if (userStatus === 'active') {
                 let loginInfo = await ctx.auth.use('web').attempt(data.uid, data.password);
                 loginInfo = loginInfo.toJSON();
@@ -91,9 +91,9 @@ export default class AuthController {
             }
             //  return await ctx.auth.use('web').attempt(data.uid, data.password)
         } catch (error) {
-            return ctx.response.status(403).send({
+            return ctx.response.status(422).send({
                 status: 'BAD',
-                message: 'username or email or password was incorrect',
+                message: [{message: 'username or email or password was incorrect'}],
                 result: []
             });
         }
