@@ -81,6 +81,11 @@ export default {
       const dlt = await this.callApi("delete", "/auth/delete", {
         id,
       });
+      if (dlt.status !== 200) {
+        this.e("something went wrong.Try again");
+      } else {
+        this.s("successfull");
+      }
     },
     update(id) {
       this.$router.push(`/profile/${id}`);
