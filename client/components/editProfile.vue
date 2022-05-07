@@ -10,7 +10,7 @@
 						placeholder="First Name"
 						size="large"
 						type="text"
-						v-model="userInfo.firstName"
+						v-model="userInfo.first_name"
 					></Input>
 				</div>
 				<div class="_log_input_group">
@@ -19,7 +19,7 @@
 						placeholder="Last Name"
 						size="large"
 						type="text"
-						v-model="userInfo.lastName"
+						v-model="userInfo.last_name"
 					></Input>
 				</div>
 				<!-- User Can not change him/her email address  -->
@@ -65,7 +65,7 @@
 				>
 					<Label>Student ID:</Label>
 					<Input
-						v-model="userInfo.studentId"
+						v-model="userInfo.student_id"
 						placeholder="Student ID"
 						size="large"
 						type="text"
@@ -104,25 +104,18 @@ export default {
 	data() {
 		return {
 			// userInfo:this.$store.state.authUser,
-			// userInfo: {},
-			userInfo:{
-                firstName : this.$store.state.authUser.first_name,
-                lastName : this.$store.state.authUser.last_name,
-                dept: this.$store.state.authUser.dept,
-                course: this.$store.state.authUser.course,
-                studentId: this.$store.state.authUser.student_id,
-            }
+			userInfo: {},
 		};
 	},
-	// async created() {
-	// 	// console.log("edit profile props=", this.userId);
-	// 	const user = await this.callApi("get", `profile/${this.userId}`);
-	// 	// console.log("user=", user);
-	// 	if (user.status === 200) {
-	// 		this.userInfo = user.data;
-	// 		console.log("user info ", this.userInfo);
-	// 	}
-	// },
+	async created() {
+		// console.log("edit profile props=", this.userId);
+		const user = await this.callApi("get", `profile/${this.userId}`);
+		// console.log("user=", user);
+		if (user.status === 200) {
+			this.userInfo = user.data;
+			console.log("user info ", this.userInfo);
+		}
+	},
 	methods: {
 		async updateUser() {
 			try {

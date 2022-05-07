@@ -1,5 +1,5 @@
 <template>
-	<div style="margin: 100px">
+	<div style="margin: 100px padding:100px 0px">
 		<div v-if="user.user_type === 'admin'">
 			<h3 style="margin: 100px 0px; text-align: center">
 				Admin dashboard
