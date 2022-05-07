@@ -7,33 +7,20 @@
 				type="button"
 				v-on:click="chooseOption()"
 			>
-			{{options === 'appoinment'?'Create Slot':'Appoinments Request'}}
+				{{
+					options === "appoinment"
+						? "Create Slot"
+						: "Appoinments Request"
+				}}
 			</button>
-			<!-- <button
-				style="marging: 30px 20px"
-				class="_log_btn _2menu_long"
-				type="button"
-			>
-				History
-			</button>
-			<button
-				style="marging: 30px 20px"
-				class="_log_btn _2menu_long"
-				type="button"
-			>
-				Add time slots
-			</button> -->
 		</div>
-		<div style="display: flex" v-if=" options === 'index' ">
-			<created-slot></created-slot>
-			<div style="margin: 165px 50px; width: 100%; height: 100%">
-				<!-- <client-only>
-					<date-picker v-model="date_today" format="HH:MM" />
-				</client-only> -->
-				<!-- <vue-timepicker v-model="date_today"></vue-timepicker> -->
-				<div class="_log_form_main">
+		<div class="main-content" v-if="options === 'index'">
+			<div>
+				<created-slot></created-slot>
+			</div>
+			<div>
+				<div class="add-time-slot">
 					<h2 class="_log_form_title">Add available time slots</h2>
-
 					<div class="_log_form">
 						<div class="_log_input_group">
 							<Select
@@ -62,7 +49,10 @@
 								v-model="endTime"
 							></vue-timepicker>
 						</div>
-						<div class="_log_button" v-if="day && startTime && endTime">
+						<div
+							class="_log_button"
+							v-if="day && startTime && endTime"
+						>
 							<Button
 								@click="addSlot"
 								type="success"
@@ -74,16 +64,15 @@
 					</div>
 				</div>
 			</div>
-			<!-- <div style="margin: 100px 50px">
-				<h2>Available Slots</h2>
-			</div> -->
-			<available-slot></available-slot>
-			<!-- {{startTime}} -->
+
+			<div>
+				<available-slot></available-slot>
+			</div>
 		</div>
-		
+
 		<!-- If app user click appoinment request -->
-		<div style="display: flex" v-if=" options === 'appoinment'">
-			<uppcomming-appoinments/>
+		<div style="display: flex" v-if="options === 'appoinment'">
+			<uppcomming-appoinments />
 		</div>
 	</div>
 </template>
@@ -93,15 +82,15 @@ import VueTimepicker from "vue2-timepicker/src/vue-timepicker.vue";
 import "vue2-timepicker/dist/VueTimepicker.css";
 import createdSlot from "./createdSlots.vue";
 import availableSlots from "./availableSlots.vue";
-import upcommingAppoinments from './upcommingAppoinments.vue'
-import moment from 'moment'
+import upcommingAppoinments from "./upcommingAppoinments.vue";
+import moment from "moment";
 
 export default {
 	components: {
 		"vue-timepicker": VueTimepicker,
 		"created-slot": createdSlot,
 		"available-slot": availableSlots,
-		'uppcomming-appoinments': upcommingAppoinments
+		"uppcomming-appoinments": upcommingAppoinments,
 	},
 	data() {
 		return {
@@ -109,7 +98,7 @@ export default {
 			startTime: "",
 			endTime: "",
 			user: null,
-			options:'index', // possible variable appoinment,index
+			options: "index", // possible variable appoinment,index
 		};
 	},
 	created() {
@@ -119,9 +108,9 @@ export default {
 	methods: {
 		async addSlot() {
 			// console.log(this.day);
-			const startTime = moment(this.startTime,'HH:mm');
-			const endTime = moment(this.endTime,'HH:mm');
-			if(endTime.diff(startTime).valueOf() > 0){
+			const startTime = moment(this.startTime, "HH:mm");
+			const endTime = moment(this.endTime, "HH:mm");
+			if (endTime.diff(startTime).valueOf() > 0) {
 				const addToDb = await this.callApi("post", "time-slots/add", {
 					teacher_id: this.user.id,
 					start_time: this.startTime,
@@ -130,20 +119,31 @@ export default {
 				});
 				console.log(addToDb.data.msg);
 				this.i(addToDb.data.msg);
-			}else{
-				this.i('Start Time and End time input in not valid')
+			} else {
+				this.i("Start Time and End time input in not valid");
 			}
 		},
-		chooseOption(value){
-			if(this.options === 'index'){
-				this.options = 'appoinment'
-			}else{
-				this.options = 'index';
+		chooseOption(value) {
+			if (this.options === "index") {
+				this.options = "appoinment";
+			} else {
+				this.options = "index";
 			}
-		}
+		},
 	},
 };
 </script>
 
 <style>
+.main-content {
+	height: 100%;
+	display: grid;
+	grid-template: 100% /1.3fr 1fr 1fr;
+	gap: 30px;
+	padding: 50px 0px;
+}
+.add-time-slot {
+	background-color: #fff;
+	padding: 30px 10px;
+}
 </style>
