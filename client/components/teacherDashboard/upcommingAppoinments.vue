@@ -16,7 +16,7 @@
           <tr v-for="(item, index) in upCommingAppoinments" :key="index">
             <th>{{ item.date }}</th>
             <th>{{ item.forWhichTimeSlot.day.day_name }}</th>
-            <!-- <th><button id="link" v-on:click="jumpToProfile(item.byWhichStudent.id)">{{item.byWhichStudent.user_name}}</button> </th> -->
+            <th><button id="link" v-on:click="jumpToProfile(item.byWhichStudent.id)">{{item.byWhichStudent.user_name}}</button> </th>
             <th>{{ item.byWhichStudent.email }}</th>
             <th>{{ item.byWhichStudent.dept }}</th>
             <th>{{ item.byWhichStudent.course }}</th>
