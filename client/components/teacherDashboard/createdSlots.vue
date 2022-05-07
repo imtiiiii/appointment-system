@@ -31,7 +31,10 @@
 						<button v-on:click="edit(item.id)">
 							{{ editFor === item.id ? "Undo" : "Edit" }}
 						</button>
-						<button v-on:click="update(item.id)">Update</button>
+						<button 
+              v-if="startTime && endTime && editFor === item.id"
+              v-on:click="update(item.id)">Update
+            </button>
 						<button v-on:click="deleteSlot(item.id, index)">
 							Delete
 						</button>
