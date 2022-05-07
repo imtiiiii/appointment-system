@@ -76,7 +76,8 @@ export default class User extends BaseModel {
 
 
     @hasMany(() => Appointment, {
-        foreignKey: 'studentId'
+        localKey:'studentId',
+        foreignKey:'id'
     })
     public studentAppointment: HasMany<typeof Appointment>
 

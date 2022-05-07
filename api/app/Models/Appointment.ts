@@ -38,7 +38,8 @@ export default class Appointment extends BaseModel {
      * Database Relationships
      */
     @belongsTo(() => User, {
-        foreignKey: 'id'
+        localKey: 'id',
+        foreignKey:'studentId'
     })
     public byWhichStudent: BelongsTo<typeof User>
 
