@@ -119,10 +119,17 @@ export default {
 				"/appointments/request",
 				data
 			);
+			console.log("req is ", req);
 			if (req.status === 200) {
-				this.s("request sent ");
 				this.agenda = "";
 				this.choosedSlotId = -1;
+				if (req.data.msg === "booked") {
+					this.e("this slot is already booked");
+				} else if (req.data.msg === "already requested") {
+					this.e("you have already requested for that slot once");
+				} else if (req.data.msg === "sucessfull") {
+					this.i("request sent");
+				}
 			} else {
 				this.e("something went wrong, try again");
 			}
@@ -160,10 +167,6 @@ export default {
 			fullDate.set("date", dateOfAmonth - 1); //setting date to  the previous day
 			const yesterday = new Date(fullDate);
 			console.log("yestarday is ", yesterday);
-			const disableDates = {
-				to: new Date(2022, 4, 26),
-				from: new Date(1970, 0, 26),
-			};
 			this.previousDates = {
 				ranges: [
 					{

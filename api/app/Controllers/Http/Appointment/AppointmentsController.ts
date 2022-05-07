@@ -17,6 +17,7 @@ export default class AppointmentsController {
 
     }
     async request(ctx: HttpContextContract) {
+        let msg = "try again"
         const data = ctx.request.all();
         const endTime = await TimeSlot.query().where("id", data.timeSlotId).select("end_time")
         console.log("end Time=", endTime[0].$attributes.endTime)
@@ -29,11 +30,37 @@ export default class AppointmentsController {
         });
         data.date = date.toString();
         let dateTime = (date + ' ' + time)
-        console.log(dateTime)
-        const req = await Appointment.create(data)
+        console.log("date is= ", data.date)
+        const isAvailable = await Appointment.query()
+            .where("date", data.date).andWhere("status", '1')
+        console.log("isAvailable size is ", isAvailable.length)
+        if (isAvailable.length !== 0) {
+            return {
+                msg: "booked"
+            }
+        }
+        else {
+            const isAlreadyrequested = await Appointment.query()
+                .where("student_id", data.studentId).andWhere("date", data.date)
+            console.log("already requested", isAlreadyrequested.length)
+            if (isAlreadyrequested.length === 0) {
+                const req = await Appointment.create(data)
+                return {
+                    msg: "sucessfull",
+                    req
+                }
+            }
+            else {
+                return {
+                    msg: "already requested"
+                }
+            }
+        }
+
+        // const req = await Appointment.create(data)
         // console.log("x is =", x);
 
-        return req;
+        // return req;
     }
     async appointments(ctx: HttpContextContract) {
         const data = ctx.request.all();
