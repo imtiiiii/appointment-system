@@ -94,7 +94,7 @@ export default class TimeSlotsController {
         const saveToDb = await TimeSlot.create(data);
         return {
             saveToDb,
-            msg: "possible"
+            msg: "possible and added successfully"
         }
 
 
@@ -142,8 +142,8 @@ export default class TimeSlotsController {
     }
 
     //TODO: This controller only accessable by teacher
-    public async delete(ctx:HttpContextContract){
+    public async delete(ctx: HttpContextContract) {
         return this.timeSlotService.delete(ctx);
     }
-    
+
 }
