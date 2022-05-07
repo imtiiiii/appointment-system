@@ -24,6 +24,7 @@
 			<div>
 				<client-only>
 					<date-picker
+						:disabled-dates="previousDates"
 						:inline="true"
 						v-model="date_today"
 						format="D"
@@ -82,10 +83,11 @@ export default {
 	data() {
 		return {
 			id: this.$route.params.id,
-			date_today: moment().toDate(),
+			date_today: new Date(moment()),
 			slots: [],
 			agenda: "",
 			choosedSlotId: null,
+			previousDates: {},
 		};
 	},
 	created() {
@@ -125,16 +127,15 @@ export default {
 		timings: function () {
 			// console.log(" im from watch date  = ", this.date_today);
 		},
+		disableDates: function () {},
 	},
 	computed: {
 		async timings() {
-			let x = moment();
-			console.log("x is=", x.toDate());
 			if (this.date_today !== null) {
 				let date = moment(this.date_today).format("DD MMM YYYY");
 				let day = moment(this.date_today).isoWeekday();
-				console.log(date.toString());
-				console.log(day.toString());
+				// console.log(date.toString());
+				// console.log(day.toString());
 				const data = {
 					teacher_id: this.id,
 					day_id: day,
@@ -144,9 +145,29 @@ export default {
 					`time-slots?teacher_id=${this.id}&day_id=${day}`
 				);
 				this.slots = slots.data;
-				console.log(this.slots);
-				console.log(this.choosedSlotId);
+				// console.log(this.slots);
+				// console.log(this.choosedSlotId);
 			}
+		},
+		disableDates() {
+			let fullDate = moment(); //get the full date
+			let dateOfAmonth = fullDate.get("date"); //date of the month
+			fullDate.set("date", dateOfAmonth - 1); //setting date to  the previous day
+			const yesterday = new Date(fullDate);
+			console.log("yestarday is ", yesterday);
+			const disableDates = {
+				to: new Date(2022, 4, 26),
+				from: new Date(1970, 0, 26),
+			};
+			this.previousDates = {
+				ranges: [
+					{
+						// Disable dates in given ranges (exclusive).
+						from: new Date(1950, 11, 25),
+						to: yesterday,
+					},
+				],
+			};
 		},
 	},
 };

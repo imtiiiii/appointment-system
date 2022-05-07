@@ -41,7 +41,6 @@ export default class AppointmentsController {
         const currdate = moment();
 
         const appointment = await Appointment.query().where("studentId", data.id).andWhere("status", "1").preload("forWhichTimeSlot", (slotQuery) => {
-
             slotQuery.preload("user")
         });
         return appointment
