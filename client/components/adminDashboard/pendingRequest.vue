@@ -1,5 +1,8 @@
 <template>
 	<div>
+		<div v-if="requests === null || requests.length < 1">
+			<h3>Nothing to show....</h3>
+		</div>
 		<div
 			v-for="(request, index) of requests"
 			:key="index"
@@ -71,6 +74,12 @@ export default {
 					status: "1",
 				}
 			);
+			console.log("accept is = ", accept.status);
+			if (accept.status === 200) {
+				this.i("request accepted successfully");
+			} else {
+				this.e("Try again");
+			}
 		},
 		async reject(id) {
 			const reject = await this.callApi(
@@ -81,6 +90,11 @@ export default {
 					status: "2",
 				}
 			);
+			if (reject.status === 200) {
+				this.i("rejected");
+			} else {
+				this.e("Try again");
+			}
 		},
 	},
 };
