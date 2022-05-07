@@ -115,6 +115,8 @@ export default {
 			try {
 				await this.$axios.$put("/time-slots/update", reqData);
 				this.i("Updated Successfully");
+        this.startTime = "";
+        this.endTime = "";
 			} catch (error) {
 				this.i("Slot conflicting");
 			}
