@@ -174,6 +174,8 @@ export default {
 			try {
 				const regReq = await this.$axios.$post("http://localhost:3333/auth/register",this.form);
 				this.isLoading = false;
+				this.i('Registration is successfully done.')
+				this.i('Account will be active after admin approval')
 			} catch (error) {
 				const err = error.response.data.message;
 				Object.keys(err).forEach((value)=>{

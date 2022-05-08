@@ -25,7 +25,7 @@ export default class AppoinmentQuery{
             }
         } 
         // return appoinmentsJSON;
-        console.log(finalResult);
+        // console.log(finalResult);
         return finalResult;
     }
 
