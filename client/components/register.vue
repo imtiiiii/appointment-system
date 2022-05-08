@@ -158,19 +158,31 @@ export default {
 			if (this.form.dept === "") this.form.dept = null;
 			this.isLoading = true;
 			// regReq means registration request
-			const regReq = await this.callApi(
-				"post",
-				"http://localhost:3333/auth/register",
-				this.form
-			);
-			this.isLoading = false;
-			if (regReq.status === 200) {
-				this.clearData();
-				return this.s("Your registration requested submitted");
-			} else {
-				return this.e("something went wrong please try again");
+			// const regReq = await this.callApi(
+			// 	"post",
+			// 	"http://localhost:3333/auth/register",
+			// 	this.form
+			// );
+			// this.isLoading = false;
+			// if (regReq.status === 200) {
+			// 	this.clearData();
+			// 	return this.s("Your registration requested submitted");
+			// } else {
+			// 	return this.e("something went wrong please try again");
+			// }
+			// // console.log(this.form);
+			try {
+				const regReq = await this.$axios.$post("http://localhost:3333/auth/register",this.form);
+				this.isLoading = false;
+			} catch (error) {
+				const err = error.response.data.message;
+				Object.keys(err).forEach((value)=>{
+					this.i(err[value][0].message);
+					
+				});
+				this.isLoading = false;
 			}
-			// console.log(this.form);
+			
 		},
 
 		clearData() {
