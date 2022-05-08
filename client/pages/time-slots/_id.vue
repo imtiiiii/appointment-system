@@ -117,6 +117,7 @@ export default {
 				date,
 				studentId: this.$store.state.authUser.id,
 				agenda: this.agenda,
+				teacherId,
 			};
 			if (this.agenda === null || this.agenda === "") {
 				this.isLoading = false;
