@@ -125,10 +125,10 @@ export default {
 					day_id: this.day,
 				});
 
-				console.log(addToDb.data.msg);
+				// console.log(addToDb.data.msg);
 				this.i(addToDb.data.msg);
 			} else {
-				this.e("Start Time and End time input in not valid");
+				this.e("Start Time and End time input is not valid");
 			}
 			this.isLoading = false;
 		},

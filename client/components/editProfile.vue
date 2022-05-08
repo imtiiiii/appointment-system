@@ -115,7 +115,7 @@ export default {
 		// console.log("user=", user);
 		if (user.status === 200) {
 			this.userInfo = user.data;
-			console.log("user info ", this.userInfo);
+			// console.log("user info ", this.userInfo);
 		}
 	},
 	methods: {

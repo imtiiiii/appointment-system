@@ -51,8 +51,8 @@ export default {
     const res = await this.callApi("get", "/appointments/upCommingAppoinments");
     const data = res.data;
     this.upCommingAppoinments = data;
-    console.log(res);
-    console.log(this.upCommingAppoinments);
+    // console.log(res);
+    // console.log(this.upCommingAppoinments);
   },
   methods: {
     async changeStatus(itemId, index, status) {

@@ -48,7 +48,7 @@ export default {
     const students = await this.callApi("get", "/dashboard/student-list/");
     if (students.status === 200) {
       this.students = students.data;
-      console.log(this.students);
+      // console.log(this.students);
     }
   },
   methods: {
@@ -57,9 +57,9 @@ export default {
         id,
       });
       if (dlt.status !== 200) {
-        this.e("something went wrong.Try again");
+        this.e("Something went wrong.Try again");
       } else {
-        this.s("successfull");
+        this.s("Successfull");
       }
     },
     update(id) {

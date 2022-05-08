@@ -133,14 +133,14 @@ export default {
 				this.agenda = "";
 				this.choosedSlotId = -1;
 				if (req.data.msg === "booked") {
-					this.e("this slot is already booked");
+					this.e("This slot is already booked");
 				} else if (req.data.msg === "already requested") {
-					this.e("you have already requested for that slot once");
+					this.e("You have already requested for that slot once");
 				} else if (req.data.msg === "sucessfull") {
-					this.s("request sent");
+					this.s("Request sent");
 				}
 			} else {
-				this.e("something went wrong, try again");
+				this.e("Something went wrong, try again");
 			}
 			this.isLoading = false;
 		},

@@ -66,7 +66,7 @@ export default {
 		if (res.status === 200) {
 			this.requests = res.data;
 		}
-		console.log("requests=>", this.requests);
+		// console.log("requests=>", this.requests);
 	},
 	methods: {
 		async accept(id) {
@@ -80,9 +80,9 @@ export default {
 				}
 			);
 			this.isLoading = false;
-			console.log("accept is = ", accept.status);
+			// console.log("accept is = ", accept.status);
 			if (accept.status === 200) {
-				this.i("request accepted successfully");
+				this.s("Request accepted successfully");
 			} else {
 				this.e("Try again");
 			}
@@ -99,7 +99,7 @@ export default {
 			);
 			this.isLoading = false;
 			if (reject.status === 200) {
-				this.i("rejected");
+				this.e("Rejected");
 			} else {
 				this.e("Try again");
 			}

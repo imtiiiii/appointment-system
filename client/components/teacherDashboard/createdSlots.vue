@@ -97,7 +97,7 @@ export default {
 				"delete",
 				`/time-slots/delete/?slotId=${slotId}`
 			);
-			this.i("Slot is deleted successfully");
+			this.s("Slot is deleted successfully");
 			this.createdSlots.splice(index, 1);
 		},
 		edit(slotId) {
@@ -116,11 +116,11 @@ export default {
 			};
 			try {
 				await this.$axios.$put("/time-slots/update", reqData);
-				this.i("Updated Successfully");
+				this.s("Updated Successfully");
 				this.startTime = "";
 				this.endTime = "";
 			} catch (error) {
-				this.i("Slot conflicting");
+				this.e("Slot conflicting");
 			}
 		},
 	},

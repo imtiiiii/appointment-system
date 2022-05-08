@@ -177,7 +177,7 @@ export default {
 			} catch (error) {
 				const err = error.response.data.message;
 				Object.keys(err).forEach((value)=>{
-					this.i(err[value][0].message);
+					this.e(err[value][0].message);
 					
 				});
 				this.isLoading = false;

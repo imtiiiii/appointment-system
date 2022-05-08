@@ -74,16 +74,16 @@ export default {
 		},
 		async history() {
 			this.appointments = [];
-			console.log("history called", this.currentDate);
+			// console.log("history called", this.currentDate);
 
 			const res = await this.callApi(
 				"get",
 				`/appointments?id=${this.$store.state.authUser.id}&type=${this.type}`
 			);
 			// this.appointments = res.data;
-			console.log(res.data);
+			// console.log(res.data);
 			for (let i of res.data) {
-				console.log("type= ", this.type);
+				// console.log("type= ", this.type);
 				if (this.type == "upcoming") {
 					let slot = moment(i.date);
 					let currDate = moment();
@@ -104,7 +104,7 @@ export default {
 					}
 				}
 			}
-			console.log("final", this.appointments);
+			// console.log("final", this.appointments);
 		},
 	},
 };

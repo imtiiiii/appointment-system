@@ -107,7 +107,7 @@ export default {
 				}
 			});
 			if (isAnyFieldEmpty === true) {
-				this.w(`${emptyFieldName} field is empty`);
+				this.e(`${emptyFieldName} field is empty`);
 			} else {
 				this.isLoading = true;
 				const { data: loginInfo } = await this.callApi(

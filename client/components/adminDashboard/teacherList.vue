@@ -82,9 +82,9 @@ export default {
         id,
       });
       if (dlt.status !== 200) {
-        this.e("something went wrong.Try again");
+        this.e("Something went wrong.Try again");
       } else {
-        this.s("successfull");
+        this.s("Successfull");
       }
     },
     update(id) {
@@ -99,12 +99,12 @@ export default {
   },
   computed: {
     searching: async function () {
-      console.log("searching for something", this.searchInput);
+      // console.log("searching for something", this.searchInput);
       if (this.searchInput === "") {
         const teachers = await this.callApi("get", "/dashboard/teacher-list/");
         if (teachers.status === 200) {
           this.teachers = teachers.data;
-          console.log(this.teachers);
+          // console.log(this.teachers);
         }
       } else {
         this.teachers = null;
@@ -113,7 +113,7 @@ export default {
           `/dashboard/teacher-list/search?value=${this.searchInput}`
         );
         this.teachers = teachers.data;
-        console.log("im from search", teachers.data);
+        // console.log("im from search", teachers.data);
       }
     },
   },
