@@ -14,11 +14,13 @@
 				}}
 			</button>
 		</div>
+		<!-- ***********CREATED SLOT ********* -->
 		<div class="main-content" v-if="options === 'index'">
-			<div>
+			<div style="background-color: #ffffff">
 				<created-slot></created-slot>
 			</div>
-			<div>
+			<!-- *********ADD TIME SLOT ********** -->
+			<div style="background-color: #ffffff">
 				<div class="add-time-slot">
 					<h2 class="_log_form_title">Add available time slots</h2>
 					<div class="_log_form">
@@ -64,8 +66,8 @@
 					</div>
 				</div>
 			</div>
-
-			<div>
+			<!-- ********* AVAILABLE SLOTS ************ -->
+			<div style="background-color: #ffffff">
 				<available-slot></available-slot>
 			</div>
 		</div>

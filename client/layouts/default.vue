@@ -71,19 +71,18 @@
 							<br />
 							<div class="_menu_right">
 								<a
-									@click="logout"
-									href="javascript:void(0)"
-									class="text-white"
-									>Logout</a
-								>
-							</div>
-
-							<div class="_menu_right">
-								<a
 									@click="jumpToProfile"
 									href="javascript:void(0)"
 									class="text-white"
-									>profile</a
+									>Profile</a
+								>
+							</div>
+							<div class="_menu_right">
+								<a
+									@click="Logout"
+									href="javascript:void(0)"
+									class="text-white"
+									>Logout</a
 								>
 							</div>
 						</div>

@@ -31,10 +31,12 @@
 						<button v-on:click="edit(item.id)">
 							{{ editFor === item.id ? "Undo" : "Edit" }}
 						</button>
-						<button 
-              v-if="startTime && endTime && editFor === item.id"
-              v-on:click="update(item.id)">Update
-            </button>
+						<button
+							v-if="startTime && endTime && editFor === item.id"
+							v-on:click="update(item.id)"
+						>
+							Update
+						</button>
 						<button v-on:click="deleteSlot(item.id, index)">
 							Delete
 						</button>
@@ -115,8 +117,8 @@ export default {
 			try {
 				await this.$axios.$put("/time-slots/update", reqData);
 				this.i("Updated Successfully");
-        this.startTime = "";
-        this.endTime = "";
+				this.startTime = "";
+				this.endTime = "";
 			} catch (error) {
 				this.i("Slot conflicting");
 			}
@@ -128,7 +130,6 @@ export default {
 table {
 	font-family: arial, sans-serif;
 	border-collapse: collapse;
-	width: 100%;
 }
 
 td,
@@ -143,7 +144,12 @@ tr:nth-child(even) {
 }
 .created-slot-partent {
 	/* margin: 100px 0px; */
-	background-color: #ffffff;
+
 	padding: 30px 10px;
+}
+.main-content {
+	display: flex;
+	justify-content: center;
+	align-content: center;
 }
 </style>
