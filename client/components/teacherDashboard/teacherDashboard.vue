@@ -57,10 +57,14 @@
 						>
 							<Button
 								@click="addSlot"
+								:loading="isLoading"
+								:disabled="loading"
 								type="success"
 								size="large"
 								long
-								>Add</Button
+								>{{
+									isLoading ? "Please wait..." : "Add"
+								}}</Button
 							>
 						</div>
 					</div>
@@ -109,6 +113,7 @@ export default {
 	},
 	methods: {
 		async addSlot() {
+			this.isLoading = true;
 			// console.log(this.day);
 			const startTime = moment(this.startTime, "HH:mm");
 			const endTime = moment(this.endTime, "HH:mm");
@@ -119,11 +124,13 @@ export default {
 					end_time: this.endTime,
 					day_id: this.day,
 				});
+
 				console.log(addToDb.data.msg);
 				this.i(addToDb.data.msg);
 			} else {
-				this.i("Start Time and End time input in not valid");
+				this.e("Start Time and End time input in not valid");
 			}
+			this.isLoading = false;
 		},
 		chooseOption(value) {
 			if (this.options === "index") {

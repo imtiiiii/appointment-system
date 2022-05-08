@@ -90,7 +90,9 @@
 						type="success"
 						size="large"
 						long
-						>Update</Button
+						:loading="isLoading"
+						:disabled="loading"
+						>{{ isLoading ? "Please wait..." : "Update" }}</Button
 					>
 				</div>
 			</div>
@@ -118,16 +120,19 @@ export default {
 	},
 	methods: {
 		async updateUser() {
+			this.isLoading = true;
 			try {
 				const resData = await this.callApi(
 					"put",
 					"/profile/update",
 					this.userInfo
 				);
+				this.isLoading = false;
 				if (resData.status === 200) {
 					this.s("Profile updated successfully");
 				}
 			} catch (error) {
+				this.isLoading = false;
 				this.swr();
 			}
 		},
