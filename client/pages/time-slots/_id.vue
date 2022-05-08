@@ -58,6 +58,8 @@
 							<!-- *********** -->
 							<button
 								v-on:click="sendReq(choosedSlotId, id)"
+								:loading="isLoading"
+								:disabled="isLoading"
 								class="update"
 								style="
 									background-color: #e182af;
@@ -65,7 +67,11 @@
 									margin-top: 5px;
 								"
 							>
-								send request
+								{{
+									isLoading
+										? "Please wait..."
+										: "Send request"
+								}}
 							</button>
 						</div>
 					</div>
@@ -103,6 +109,7 @@ export default {
 			console.log("slot id called", this.choosedSlotId);
 		},
 		async sendReq(timeSlotId, teacherId) {
+			this.isLoading = true;
 			let date = moment(this.date_today).toString();
 			let day = moment(this.date_today).isoWeekday();
 			const data = {
@@ -112,6 +119,7 @@ export default {
 				agenda: this.agenda,
 			};
 			if (this.agenda === null || this.agenda === "") {
+				this.isLoading = false;
 				return this.e("mention your agenda for meeting");
 			}
 			const req = await this.callApi(
@@ -119,6 +127,7 @@ export default {
 				"/appointments/request",
 				data
 			);
+
 			console.log("req is ", req);
 			if (req.status === 200) {
 				this.agenda = "";
@@ -128,11 +137,12 @@ export default {
 				} else if (req.data.msg === "already requested") {
 					this.e("you have already requested for that slot once");
 				} else if (req.data.msg === "sucessfull") {
-					this.i("request sent");
+					this.s("request sent");
 				}
 			} else {
 				this.e("something went wrong, try again");
 			}
+			this.isLoading = false;
 		},
 	},
 	watch: {
