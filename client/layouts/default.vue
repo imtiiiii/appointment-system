@@ -59,8 +59,8 @@
 			   -->
 						</div>
 
-						<div class="_layout_auto">
-							<div class="_menu_right">
+						<div class="nav">
+							<div class="">
 								<a
 									@click="jumpToDashBoard()"
 									href="javascript:void(0)"
@@ -69,7 +69,7 @@
 								>
 							</div>
 							<br />
-							<div class="_menu_right">
+							<div class="">
 								<a
 									@click="jumpToProfile"
 									href="javascript:void(0)"
@@ -77,9 +77,9 @@
 									>Profile</a
 								>
 							</div>
-							<div class="_menu_right">
+							<div class>
 								<a
-									@click="Logout"
+									@click="logout"
 									href="javascript:void(0)"
 									class="text-white"
 									>Logout</a
@@ -166,3 +166,9 @@ export default {
 	created() {},
 };
 </script>
+<style scoped>
+.nav {
+	display: flex;
+	gap: 10%;
+}
+</style>
