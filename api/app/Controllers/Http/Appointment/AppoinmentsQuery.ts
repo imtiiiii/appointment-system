@@ -3,6 +3,7 @@ import moment from "moment";
 moment().format()
 export default class AppoinmentQuery{
     public async upCommingAppoinments(upCommingAppoinmentsFor){
+        console.log(upCommingAppoinmentsFor);
         /**
          * Find all appoinments Request which is not accepted yet
          */
@@ -15,14 +16,16 @@ export default class AppoinmentQuery{
         }).preload('byWhichStudent').andWhere('status','0').orderBy('date','desc');
         // let appoinments = await Appointment.query().select('*').preload('byWhichStudent');
         const appoinmentsJSON = appoinments.map((appoinments)=> appoinments.serialize())
+        // console.log(appoinmentsJSON);
         const finalResult : object[] = [];
         for(let x of appoinmentsJSON){
             let dbDate = moment(x.date);
-            if(dbDate.isAfter(cuurentDate)){
+            if(dbDate.isAfter(cuurentDate) && x.forWhichTimeSlot){
                 finalResult.push(x);
             }
         } 
         // return appoinmentsJSON;
+        console.log(finalResult);
         return finalResult;
     }
 
