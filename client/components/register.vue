@@ -172,19 +172,21 @@ export default {
 			// }
 			// // console.log(this.form);
 			try {
-				const regReq = await this.$axios.$post("http://localhost:3333/auth/register",this.form);
+				const regReq = await this.$axios.$post(
+					"http://localhost:3333/auth/register",
+					this.form
+				);
 				this.isLoading = false;
-				this.i('Registration is successfully done.')
-				this.i('Account will be active after admin approval')
+				this.i("Registration is successfully done.");
+				this.i("Account will be active after admin approval");
+				this.clearData();
 			} catch (error) {
 				const err = error.response.data.message;
-				Object.keys(err).forEach((value)=>{
+				Object.keys(err).forEach((value) => {
 					this.e(err[value][0].message);
-					
 				});
 				this.isLoading = false;
 			}
-			
 		},
 
 		clearData() {

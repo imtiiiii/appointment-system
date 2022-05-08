@@ -99,7 +99,7 @@ export default {
 			);
 			this.isLoading = false;
 			if (reject.status === 200) {
-				this.e("Rejected");
+				this.s("Rejected");
 			} else {
 				this.e("Try again");
 			}
