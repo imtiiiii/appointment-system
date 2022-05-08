@@ -76,7 +76,7 @@ export default class AuthValidator {
             const payload = await ctx.request.validate({ schema: userSchema, messages: msg })
             return payload
         } catch (error) {
-            console.log(error.messages)
+            // console.log(error.messages)
             //  return ctx.response.status(422).send(error.messages)
             const errorMessage = JSON.stringify(error.messages);
             throw errorMessage;

@@ -18,7 +18,7 @@ export default class ProfileController {
         // delete userInfo.password;
         userInfo = userInfo?.toJSON();
         delete userInfo?.password;
-        console.log(userInfo);
+        // console.log(userInfo);
         return ctx.response.send(userInfo);
     }
     /** 
