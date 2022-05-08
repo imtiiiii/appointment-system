@@ -30,6 +30,8 @@
 							width: 100px;
 							padding: 15px 0px;
 						"
+						:loading="isLoading"
+						:disabled="isLoading"
 					>
 						Accept
 					</button>
@@ -41,6 +43,8 @@
 							width: 100px;
 							padding: 15px 0px;
 						"
+						:loading="isLoading"
+						:disabled="isLoading"
 					>
 						Reject
 					</button>
@@ -66,6 +70,7 @@ export default {
 	},
 	methods: {
 		async accept(id) {
+			this.isLoading = true;
 			const accept = await this.callApi(
 				"put",
 				"dashboard/update/status",
@@ -74,6 +79,7 @@ export default {
 					status: "1",
 				}
 			);
+			this.isLoading = false;
 			console.log("accept is = ", accept.status);
 			if (accept.status === 200) {
 				this.i("request accepted successfully");
@@ -82,6 +88,7 @@ export default {
 			}
 		},
 		async reject(id) {
+			this.isLoading = true;
 			const reject = await this.callApi(
 				"put",
 				"dashboard/update/status",
@@ -90,6 +97,7 @@ export default {
 					status: "2",
 				}
 			);
+			this.isLoading = false;
 			if (reject.status === 200) {
 				this.i("rejected");
 			} else {
