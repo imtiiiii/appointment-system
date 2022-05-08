@@ -106,7 +106,7 @@ export default {
 	methods: {
 		slotId(id) {
 			this.choosedSlotId = id;
-			console.log("slot id called", this.choosedSlotId);
+			// console.log("slot id called", this.choosedSlotId);
 		},
 		async sendReq(timeSlotId, teacherId) {
 			this.isLoading = true;
@@ -120,7 +120,7 @@ export default {
 			};
 			if (this.agenda === null || this.agenda === "") {
 				this.isLoading = false;
-				return this.e("mention your agenda for meeting");
+				return this.e("Mention your agenda for meeting");
 			}
 			const req = await this.callApi(
 				"post",
@@ -128,7 +128,7 @@ export default {
 				data
 			);
 
-			console.log("req is ", req);
+			// console.log("req is ", req);
 			if (req.status === 200) {
 				this.agenda = "";
 				this.choosedSlotId = -1;
@@ -176,7 +176,7 @@ export default {
 			let dateOfAmonth = fullDate.get("date"); //date of the month
 			fullDate.set("date", dateOfAmonth - 1); //setting date to  the previous day
 			const yesterday = new Date(fullDate);
-			console.log("yestarday is ", yesterday);
+			// console.log("yestarday is ", yesterday);
 			this.previousDates = {
 				ranges: [
 					{
