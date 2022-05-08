@@ -163,7 +163,9 @@ export default {
 		},
 	},
 
-	created() {},
+	created() {
+		console.log("mixing test", this.isLoading);
+	},
 };
 </script>
 <style scoped>

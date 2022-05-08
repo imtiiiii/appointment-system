@@ -123,9 +123,11 @@ export default {
 	methods: {
 		async register() {
 			// ************FRONT END VALIDATION**************
+
 			this.form.email = this.form.email.toLowerCase();
-			if (this.form.firstName == "")
+			if (this.form.firstName == "") {
 				return this.i("Firstname is requied");
+			}
 			if (this.form.lastName == "") return this.i("Lastname is requied");
 			// console.log(this.form.user_type);
 			if (this.form.email == "") return this.i("Email is requied");
@@ -154,13 +156,14 @@ export default {
 			// ********** COVERING CORNER CASES*********
 			if (this.form.userType === "teacher") this.form.studentId = null;
 			if (this.form.dept === "") this.form.dept = null;
-
+			this.isLoading = true;
 			// regReq means registration request
 			const regReq = await this.callApi(
 				"post",
 				"http://localhost:3333/auth/register",
 				this.form
 			);
+			this.isLoading = false;
 			if (regReq.status === 200) {
 				this.clearData();
 				return this.s("Your registration requested submitted");
