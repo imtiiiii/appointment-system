@@ -117,6 +117,10 @@ export default {
           const authUserData = loginInfo.result[0];
           this.$store.state.authUser = authUserData;
           this.$router.push("/");
+        }else if(loginInfo.status === 'PENDING'){
+          this.i("You are not approved by Admin yet")
+        }else if(loginInfo.status === 'REJECTED'){
+          this.i("Your account is rejected by admin");
         }
         // try {
         //   const { data: loginInfo } = await this.callApi(

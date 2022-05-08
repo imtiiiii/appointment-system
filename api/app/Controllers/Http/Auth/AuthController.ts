@@ -78,6 +78,16 @@ export default class AuthController {
                     message: 'Logged In successfull',
                     result: result
                 });
+            }else if(userStatus === 'rejected'){
+                return await ctx.response.status(200).send({
+                    status: 'REJECTED',
+                    message: 'User is registerd and rejected by Admin',
+                    result: [
+                        {
+                            user_status: userStatus
+                        }
+                    ]
+                });
             } else {
                 return await ctx.response.status(200).send({
                     status: 'PENDING',
