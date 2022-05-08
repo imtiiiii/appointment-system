@@ -122,11 +122,10 @@ export default {
 				this.isLoading = false;
 				return this.e("Mention your agenda for meeting");
 			}
-			const req = await this.callApi(
-				"post",
-				"/appointments/request",
-				data
-			);
+			const req = await this.callApi("post", "/appointments/request", {
+				data,
+				teacherId,
+			});
 
 			// console.log("req is ", req);
 			if (req.status === 200) {
