@@ -6,7 +6,7 @@
 		<div
 			v-if="appointments.length !== 0"
 			style="
-				height: 100vh;
+				height: 100%;
 				background-color: #b8caff;
 				width: 70%;
 				margin: 30px auto;
@@ -118,5 +118,6 @@ export default {
 	/* grid-row-gap: 100px; */
 	grid-column-gap: 60px;
 	margin: 10px 0px 100px 0px;
+	padding: 30px 0px;
 }
 </style>
