@@ -39,9 +39,9 @@ export default class AppointmentsController {
             query.andWhere("teacher_id", all.teacherId)
         }).andWhere("date", data.date).andWhere("status", "1")
 
-        console.log("isAvailable size is ", isAvailable.length)
+        // console.log("isAvailable size is ", isAvailable.length)
         for (let i of isAvailable) {
-            console.log("loop", i.forWhichTimeSlot)
+
             if (i.forWhichTimeSlot !== null) {
                 return {
                     msg: "booked"
@@ -51,20 +51,38 @@ export default class AppointmentsController {
         // ******* if already not booked by students ******
 
         const isAlreadyrequested = await Appointment.query()
-            .where("student_id", data.studentId).andWhere("date", data.date)
-        console.log("already requested", isAlreadyrequested.length)
-        if (isAlreadyrequested.length === 0) {
-            const req = await Appointment.create(data)
-            return {
-                msg: "sucessfull",
-                req
+            .where("student_id", data.studentId).andWhere("date", data.date).preload("forWhichTimeSlot").preload("forWhichTimeSlot", query => {
+                query.andWhere("teacher_id", all.teacherId)
+            })
+        console.log("isalready size is ", isAlreadyrequested.length)
+        for (let i of isAlreadyrequested) {
+            console.log("i is = ", i.forWhichTimeSlot)
+            if (i.forWhichTimeSlot !== null) {
+                return {
+                    msg: "already requested"
+                }
             }
         }
-        else {
-            return {
-                msg: "already requested"
-            }
+        const req = await Appointment.create(data)
+        return {
+            msg: "sucessfull",
+            req
         }
+        // console.log("already requested", isAlreadyrequested.length)
+
+
+        // if (isAlreadyrequested.length === 0) {
+        //     const req = await Appointment.create(data)
+        //     return {
+        //         msg: "sucessfull",
+        //         req
+        //     }
+        // }
+        // else {
+        //     return {
+        //         msg: "already requested"
+        //     }
+        // }
 
     }
     async appointments(ctx: HttpContextContract) {
