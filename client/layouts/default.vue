@@ -169,6 +169,6 @@ export default {
 <style scoped>
 .nav {
 	display: flex;
-	gap: 10%;
+	gap: 30px;
 }
 </style>
