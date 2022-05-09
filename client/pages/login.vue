@@ -117,6 +117,7 @@ export default {
 				);
 				this.isLoading = false;
 				if (loginInfo.status === "OK") {
+					this.s("login successfull");
 					const authUserData = loginInfo.result[0];
 					this.$store.state.authUser = authUserData;
 					this.$router.push("/");

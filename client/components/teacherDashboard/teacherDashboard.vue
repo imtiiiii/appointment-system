@@ -149,7 +149,7 @@ export default {
 	display: grid;
 	grid-template: 100% /1.3fr 1fr 1fr;
 	gap: 30px;
-	padding: 50px 0px;
+	padding: 50px 40px;
 }
 .add-time-slot {
 	background-color: #fff;
