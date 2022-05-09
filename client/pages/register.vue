@@ -40,7 +40,7 @@
 <script>
 import register from "../components/register.vue";
 export default {
-  midleware: "guest",
+  middleware: "guest",
   components: { register: register },
   //
 };
